@@ -6,7 +6,6 @@ services:
     working_dir: /app
     ports:
       - 8080:8080
-      - 5050:5050
     tty: true
     volumes:
       - ./:/app
