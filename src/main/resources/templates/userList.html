@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登録されたユーザー</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>登録されたユーザー（確認用）</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ユーザー名</th>
+                    <th>メールアドレス</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.userName}">ユーザー名</td>
+                    <td th:text="${user.email}">メールアドレス</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
