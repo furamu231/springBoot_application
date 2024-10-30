@@ -1,7 +1,5 @@
 package com.spring.springbootapplication.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.springbootapplication.dto.UserSignUpDTO;
 import com.spring.springbootapplication.service.UserService;
@@ -28,24 +27,28 @@ public class UserController {
     @GetMapping("/signup") 
     public String showSignUpForm(Model model) {
         model.addAttribute("user", new UserSignUpDTO()); 
-        return "form"; 
+        return "signup"; 
     }
 
     @PostMapping("/signup") 
     public String signUp(@Valid @ModelAttribute("user") UserSignUpDTO userDTO, BindingResult result) {
         if (result.hasErrors()) {
-            return "form"; 
+            return "signup"; 
         }
         userService.registerUser(userDTO);
         return "redirect:/users/userList"; 
     }
 
-    // ユーザー登録確認用 (削除必須)
+    @GetMapping("/signin") 
+    public String showLoginForm(@RequestParam(value = "error", required = false) String error, Model model) {
+        if (error != null) {
+            model.addAttribute("errorMessage", "メールアドレス、もしくはパスワードが間違っています");
+        }
+        return "signin"; 
+    }
 
-    @GetMapping("/userList") 
-    public String showUserList(Model model) {
-        List<UserSignUpDTO> users = userService.getUserCredentials(); 
-        model.addAttribute("users", users);
-        return "userList"; 
+    @GetMapping("/success")
+    public String confirm() {
+        return "userList";
     }
 }

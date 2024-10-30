@@ -1,0 +1,327 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    width: 100vw;
+    height: 1024px; 
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.header {
+    width: 100%;
+    height: 120px;
+    background-color: #1B5678;
+    color: white;
+    display: flex; 
+    align-items: center;
+    padding: 0 20px;
+    font-size: 36px;
+}
+
+.login-btn {
+    background-color: white;
+    color: #2c5670;
+    border: 1px solid #1B5678;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: auto; 
+}
+
+.login-btn:hover {
+    background-color: #1B5678;
+    color: white;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-grow: 1;
+}
+
+.registration-title {
+    font-family: 'Roboto', sans-serif; 
+    font-size: 36px; 
+    font-weight: 400; 
+    line-height: 48.02px; 
+    position: absolute;
+    top: 200px; 
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #000000;
+}
+
+ .form-container {
+    width: 480px;
+    height: 341px;
+    padding: 0; 
+    margin-top: 204px; 
+    background-color: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    color: #888888;
+}
+
+.form-group input {
+    width: 100%; 
+    height: 48px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #888888;
+    outline: none;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    background-color: #1B5678;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 232px;
+    height: 53px;
+    margin-top: auto; 
+    align-self: center;
+}
+
+.btn-primary {
+    background-color: #1B5678;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 232px;
+    height: 53px;
+    margin-top: auto; 
+    align-self: center;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: #1B5678;
+    border: 1px solid #1B5678;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 232px;
+    height: 53px;
+    margin-top: 15px; 
+    align-self: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.footer {
+    width: 100%;
+    height: 40px;
+    background-color: #1B5678;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    position: absolute; 
+    bottom: 0;
+    left: 0;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+} */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    width: 100vw;
+    height: 1024px; 
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* ヘッダー */
+.header {
+    width: 100%;
+    height: 120px;
+    background-color: #1B5678;
+    color: white;
+    display: flex; 
+    align-items: center;
+    padding: 0 20px;
+    font-size: 36px;
+    position: relative;
+}
+
+/* ヘッダーのタイトルの中央配置クラス */
+.header-title.center-title {
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* ログインボタン */
+.login-btn {
+    background-color: white;
+    color: #2c5670;
+    border: 1px solid #1B5678;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: auto; 
+}
+
+.login-btn:hover {
+    background-color: #1B5678;
+    color: white;
+}
+
+/* コンテンツの全体配置 */
+.content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-grow: 1;
+}
+
+
+.registration-title {
+    font-family: 'Roboto', sans-serif; 
+    font-size: 36px; 
+    font-weight: 400; 
+    line-height: 48.02px; 
+    position: absolute;
+    top: 200px; 
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #000000;
+}
+
+/* フォーム全体 */
+.form-container {
+    width: 480px;
+    height: 341px;
+    padding: 0; 
+    margin-top: 204px; 
+    background-color: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* フォームのグループ */
+.form-group {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    color: #888888;
+}
+
+.form-group input {
+    width: 100%; 
+    height: 48px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #888888;
+    outline: none;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+
+/* ボタンのデザイン */
+.btn-primary {
+    background-color: #1B5678;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 232px;
+    height: 53px;
+    margin-top: auto; 
+    align-self: center;
+}
+
+/* 新規登録ボタン */
+.btn-secondary {
+    background-color: white;
+    color: #1B5678;
+    border: 1px solid #1B5678;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 232px;
+    height: 53px;
+    margin-top: 15px; /* ログインボタンとの間に余白 */
+    align-self: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #1B5678;
+    color: white;
+}
+
+/* フッター */
+.footer {
+    width: 100%;
+    height: 40px;
+    background-color: #1B5678;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    position: absolute; 
+    bottom: 0;
+    left: 0;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
