@@ -3,6 +3,8 @@ package com.spring.springbootapplication.controller;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -60,6 +62,35 @@ public class UserController {
     }
     return "signin"; 
     }
+
+    @PostMapping("/signin")
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
+    try {
+        // メールアドレスを使ってユーザー情報を取得
+        UserDetails userDetails = userService.loadUserByEmail(email);
+        
+        // 認証トークンの作成
+        Authentication auth = new UsernamePasswordAuthenticationToken(
+            userDetails.getUsername(), 
+            password, 
+            userDetails.getAuthorities()
+        );
+        
+        // 認証コンテキストに設定
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+        // ログイン成功時のリダイレクト
+        return "redirect:/users/success"; // 成功時のリダイレクト先
+    } catch (UsernameNotFoundException e) {
+        // 認証失敗時のエラーメッセージ設定
+        model.addAttribute("errorMessage", "メールアドレス、もしくはパスワードが間違っています");
+        return "signin"; // ログインフォームに戻る
+    } catch (Exception e) {
+        // その他の例外処理
+        model.addAttribute("errorMessage", "ログイン中にエラーが発生しました。再試行してください。");
+        return "signin"; // ログインフォームに戻る
+    }
+}
 
     @GetMapping("/success/{id}")
     public String confirm(@PathVariable Integer id, Model model) {
