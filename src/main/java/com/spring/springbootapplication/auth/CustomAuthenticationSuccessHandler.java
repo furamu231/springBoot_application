@@ -28,20 +28,18 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         if (authentication.getPrincipal() instanceof UserDetails userDetails) {
             String username = userDetails.getUsername();
-            Integer userId = userService.findUserIdByUsername(username);
+            Integer userId = userService.findUserIdByUsername(username); // ユーザー名でIDを取得
 
             if (userId != null) {
                 response.sendRedirect("/users/success/" + userId);
             } else {
                 // `userId` が `null` の場合の処理
                 response.sendRedirect("/users/signin?error=true");
-                // ログの追加（推奨）
                 System.err.println("User ID is null for username: " + username);
             }
         } else {
             // ログインに失敗した場合のリダイレクト
             response.sendRedirect("/users/signin?error=true");
-            // ログの追加
             System.err.println("Principal is not an instance of UserDetails.");
         }
     }
