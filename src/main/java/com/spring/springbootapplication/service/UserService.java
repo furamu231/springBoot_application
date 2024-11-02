@@ -14,9 +14,6 @@ import com.spring.springbootapplication.repository.UserMapper;
 public class UserService implements UserDetailsService {
 
     private final UserMapper userMapper;
-
-    // ハッシュ化、SecurityConfigに書けそう
-
     private final PasswordEncoder passwordEncoder;
 
     public UserService(UserMapper userMapper, PasswordEncoder passwordEncoder) {
@@ -43,20 +40,18 @@ public class UserService implements UserDetailsService {
     }
 
     public Integer findUserIdByUsername(String username) {
-        User user = userMapper.findByEmail(username); 
-        return user != null ? user.getId() : null;
+        User user = userMapper.findByUserName(username); // ユーザー名で検索
+        return user != null ? user.getId() : null; // ユーザーが存在すればIDを返す
     }
 
-    // ここSecuriryConfigに書けそう
-
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userMapper.findByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userMapper.findByUserName(username); 
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("User not found with username: " + username);
         }
         return org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail())
+                .withUsername(user.getUserName())
                 .password(user.getPassword())
                 .authorities("USER")
                 .build();

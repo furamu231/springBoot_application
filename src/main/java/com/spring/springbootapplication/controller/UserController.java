@@ -44,24 +44,21 @@ public class UserController {
         Integer userId = userService.registerUser(userDTO);
         System.out.println("Generated userId: " + userId);
 
-        // 自動ログイン処理
         request.login(userDTO.getUserName(), userDTO.getPassword());
 
         Authentication auth = new UsernamePasswordAuthenticationToken(
         userDTO.getUserName(), userDTO.getPassword(), userService.loadUserByUsername(userDTO.getUserName()).getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-
-        // 認証済みの状態でリダイレクト
         return "redirect:/users/success/" + userId;
     }
 
     @GetMapping("/signin") 
     public String showLoginForm(@RequestParam(value = "error", required = false) String error, Model model) {
-        if (error != null) {
-            model.addAttribute("errorMessage", "メールアドレス、もしくはパスワードが間違っています");
-        }
-        return "signin"; 
+    if (error != null) {
+        model.addAttribute("errorMessage", "メールアドレス、もしくはパスワードが間違っています");
+    }
+    return "signin"; 
     }
 
     @GetMapping("/success/{id}")
