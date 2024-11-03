@@ -1,5 +1,7 @@
 package com.spring.springbootapplication.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,7 +50,9 @@ public class UserController {
     }
 
     @GetMapping("/success")
-    public String confirm() {
-        return "userList";
+    public String confirm(Principal principal, Model model) {
+        String username = principal.getName(); 
+        model.addAttribute("username", username); 
+        return "home"; 
     }
 }
