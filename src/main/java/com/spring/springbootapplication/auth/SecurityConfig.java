@@ -27,12 +27,12 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/users/success", true)
                 .failureUrl("/users/signin?error=true")  
                 .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .permitAll()
             );
-            // .logout(logout -> logout
-            //     .logoutUrl("/logout")
-            //     .logoutSuccessUrl("/login")
-            //     .permitAll()
-            // );
         
         return http.build();
     }
