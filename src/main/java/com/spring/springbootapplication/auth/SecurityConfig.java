@@ -37,11 +37,7 @@ public class SecurityConfig {
             .formLogin(formLogin -> formLogin
                 .loginPage("/users/signin")
                 .loginProcessingUrl("/users/signin")
-
-                // 多分動的なパスの場合、カスタムハンドラ必要かも
-
-                .successHandler(customAuthenticationSuccessHandler()) 
-                .failureUrl("/users/signin?error=true")
+                .successHandler(customAuthenticationSuccessHandler())             
                 .permitAll()
             )
             .logout(logout -> logout
