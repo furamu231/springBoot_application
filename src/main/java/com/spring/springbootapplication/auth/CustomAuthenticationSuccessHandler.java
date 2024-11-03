@@ -23,25 +23,21 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
-        if (authentication.getPrincipal() instanceof CustomUserDetails customUserDetails) {
-            String username = customUserDetails.getUsername();
-            String email = customUserDetails.getEmail();
-            
-            Integer userId = userService.findUserIdByUsername(username);
-            if (userId == null) {
-                userId = userService.findUserIdByEmail(email);
-            }
-            
-            if (userId != null) {
-                response.sendRedirect("/users/success/" + userId);
-            } else {
-                response.sendRedirect("/users/signin?error=true");
-                System.err.println("User ID is null for username: " + username + " or email: " + email);
-            }
+                                    Authentication authentication) throws IOException, ServletException {
+    if (authentication.getPrincipal() instanceof CustomUserDetails customUserDetails) {
+        String identifier = customUserDetails.getUsername();
+
+        Integer userId = userService.findByUserNameOrEmail(identifier);
+        
+        if (userId != null) {
+            response.sendRedirect("/users/success/" + userId);
         } else {
             response.sendRedirect("/users/signin?error=true");
-            System.err.println("Principal is not an instance of CustomUserDetails.");
+            System.err.println("User ID is null for identifier: " + identifier);
         }
+    } else {
+        response.sendRedirect("/users/signin?error=true");
+        System.err.println("Principal is not an instance of CustomUserDetails.");
     }
+}
 }

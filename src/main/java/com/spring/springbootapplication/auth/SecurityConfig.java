@@ -16,10 +16,7 @@ import com.spring.springbootapplication.service.UserService;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final UserService userService;
-
-    // 循環依存回避
-    // CustomAuthenticationSuccessHandler -> UserService -> SecurityConfig -> CustomAuthenticationSuccessHandler?                                          
+    private final UserService userService; 
 
     public SecurityConfig(@Lazy UserService userService) {
         this.userService = userService;
