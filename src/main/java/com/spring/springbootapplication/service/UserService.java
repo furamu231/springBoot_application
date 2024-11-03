@@ -40,16 +40,13 @@ public class UserService implements UserDetailsService {
     }
 
     public Integer findUserIdByUsername(String username) {
-        User user = userMapper.findByUserName(username); // ユーザー名で検索
-        return user != null ? user.getId() : null; // ユーザーが存在すればIDを返す
+        User user = userMapper.findByUserName(username);
+        return user != null ? user.getId() : null;
     }
 
-    public User findUserByEmail(String email) {
-        User user = userMapper.findByEmail(email); // ここでメールアドレスを使ってユーザーを検索
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with email: " + email);
-        }
-        return user;
+    public Integer findUserIdByEmail(String email) {
+        User user = userMapper.findByEmail(email); 
+        return user != null ? user.getId() : null; 
     }
 
     @Override
@@ -66,12 +63,12 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
-        User user = userMapper.findByEmail(email); // メールアドレスでユーザーを取得
+        User user = userMapper.findByEmail(email); 
         if (user == null) {
             throw new UsernameNotFoundException("User not found with email: " + email);
         }
         return org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail()) // メールアドレスをユーザー名として使用
+                .withUsername(user.getEmail()) 
                 .password(user.getPassword())
                 .authorities("USER")
                 .build();
