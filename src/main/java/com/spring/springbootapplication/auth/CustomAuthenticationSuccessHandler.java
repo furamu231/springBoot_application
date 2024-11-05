@@ -3,6 +3,7 @@ package com.spring.springbootapplication.auth;
 import java.io.IOException;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -24,20 +25,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                     Authentication authentication) throws IOException, ServletException {
-    if (authentication.getPrincipal() instanceof CustomUserDetails customUserDetails) {
-        String identifier = customUserDetails.getUsername();
+    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    String identifier = userDetails.getUsername();
 
-        Integer userId = userService.findByUserNameOrEmail(identifier);
-        
-        if (userId != null) {
-            response.sendRedirect("/users/success/" + userId);
-        } else {
-            response.sendRedirect("/users/signin?error=true");
-            System.err.println("User ID is null for identifier: " + identifier);
-        }
+    Integer userId = userService.findByUserNameOrEmail(identifier);
+    
+    if (userId != null) {
+        response.sendRedirect("/users/success/" + userId);
     } else {
         response.sendRedirect("/users/signin?error=true");
-        System.err.println("Principal is not an instance of CustomUserDetails.");
+        System.err.println("User ID is null for identifier: " + identifier);
     }
 }
 }
