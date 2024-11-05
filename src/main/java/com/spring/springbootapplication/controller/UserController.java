@@ -1,8 +1,5 @@
 package com.spring.springbootapplication.controller;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,14 +38,13 @@ public class UserController {
         if (result.hasErrors()) {
             return "signup";
         }
+    
         Integer userId = userService.registerUser(userDTO);
-
-        request.login(userDTO.getUserName(), userDTO.getPassword());
-
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-        userDTO.getUserName(), userDTO.getPassword(), userService.loadUserByUsername(userDTO.getUserName()).getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
+    
+        if (request.getUserPrincipal() == null) {
+            request.login(userDTO.getUserName(), userDTO.getPassword());
+        }
+    
         return "redirect:/users/success/" + userId;
     }
 
