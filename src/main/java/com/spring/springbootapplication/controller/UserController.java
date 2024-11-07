@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.springbootapplication.dto.UserSignUpDTO;
+import com.spring.springbootapplication.entity.User;
 import com.spring.springbootapplication.service.UserService;
 
 import jakarta.servlet.ServletException;
@@ -59,7 +60,17 @@ public class UserController {
     @GetMapping("/success/{id}")
     public String confirm(@PathVariable Integer id, Model model) {
         System.out.println("User ID: " + id);
-        model.addAttribute("userId", id);
+        var user = userService.findUserById(id); 
+        model.addAttribute("user", user); 
         return "top";
     }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+    User user = userService.findUserById(id); 
+    model.addAttribute("user", user);
+    return "edit"; 
+}
+
+   
 }
