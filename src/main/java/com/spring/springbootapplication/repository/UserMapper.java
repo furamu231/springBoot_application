@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.spring.springbootapplication.entity.User;
 
@@ -24,4 +25,13 @@ public interface UserMapper {
 
     @Select("SELECT * FROM users WHERE id = #{id}")
     User findById(Integer id);
+
+    @Update("""
+        UPDATE users 
+        SET profile = #{profile}, 
+            profile_image = #{profileImage}, 
+            updated_at = CURRENT_TIMESTAMP 
+        WHERE id = #{id}
+    """)
+    void updateUserProfile(User user); 
 }

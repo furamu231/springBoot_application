@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.springbootapplication.dto.UserSignUpDTO;
 import com.spring.springbootapplication.entity.User;
@@ -67,10 +69,34 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
-    User user = userService.findUserById(id); 
-    model.addAttribute("user", user);
-    return "edit"; 
+        User user = userService.findUserById(id); 
+        model.addAttribute("user", user);
+        return "edit"; 
+    }
+    
+    @PostMapping("/edit/{id}")
+public String updateUserProfile(@PathVariable Integer id,
+                                @RequestParam("profile") String profile,
+                                @RequestParam(value = "profileImage", required = false) MultipartFile profileImage,
+                                RedirectAttributes redirectAttributes) {
+    try {
+        User user = userService.findUserById(id);
+        user.setProfile(profile);
+
+        // 画像データがアップロードされた場合に設定
+        if (profileImage != null && !profileImage.isEmpty()) {
+            user.setProfileImage(profileImage.getBytes());
+        }
+
+        // 正しく引数を渡す
+        userService.updateUserProfile(user);
+        redirectAttributes.addFlashAttribute("successMessage", "プロフィールが更新されました");
+        return "redirect:/users/success/" + id;
+    } catch (Exception e) {
+        e.printStackTrace();
+        redirectAttributes.addFlashAttribute("errorMessage", "プロフィールの更新に失敗しました");
+        return "redirect:/users/edit/" + id;
+    }
 }
 
-   
 }
