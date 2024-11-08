@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>トップページ</title>
+    <link rel="stylesheet" href="/css/top.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-title">My Portfolio</div>
+        <button class="login-btn" onclick="window.location.href='/logout'">ログアウト</button>
+    </div>
+    <div class="content">
+            <div class="main-container">
+                <div class="icon-container">
+                    <div class="circle-icon">
+                        <!-- このグレー背景でいいかも "/images/gray.jpg" -->
+                        <img src="/images/gray.jpg" alt="">
+                    </div>
+                </div>          
+                <div class="intro-container">
+
+                    <div class="intro-sub-container">
+                        <div class="intro-sub-child-container">
+                            自己紹介
+                        </div>
+                    </div>
+
+                    <!-- <div class="intro-secondary-container">
+                        自己紹介文の一部です。ここには自己紹介の内容が表示されます。
+                        編集画面で編集可能にします。現在ログインしているユーザーは以下の通りです。
+                        <p th:text="${user.userName}"></p>
+                    </div> -->
+
+                    <div class="intro-secondary-container" th:text="'自己紹介文の一部です。ここには自己紹介の内容が表示されます。 編集画面で編集可能にします。現在ログインしているユーザーは: ' + ${user.userName} + ' です。よろしくお願いします。'">
+                    </div>
+                    <a class="intro-button" th:href="@{/users/edit/{id}(id=${user.id})}">自己紹介を編集する</a>
+                </div>
+            </div>
+    </div>
+    <div class="footer">
+        portfolio site
+    </div>
+</body>
+</html>
