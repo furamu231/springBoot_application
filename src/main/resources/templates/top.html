@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/top.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
-
 <body>
     <div class="header">
         <div class="header-title">My Portfolio</div>
@@ -21,17 +20,14 @@
                     th:alt="${user.profileImage != null && user.profileImage.length > 0 ? 'プロフィール画像' : 'デフォルト画像'}" />
                 </div>
             </div> 
-
             <div class="intro-container">
                 <div class="intro-sub-container">
                     <div class="intro-sub-child-container">
                         自己紹介
                     </div>
                 </div>
-
                 <div class="intro-secondary-container" th:text="${user.profile != null} ? ${user.profile} : '自己紹介がまだ登録されていません。'">
                 </div>
-
                 <a class="intro-button" th:href="@{/users/edit/{id}(id=${user.id})}">自己紹介を編集する</a>
             </div>
         </div>

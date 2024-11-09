@@ -1,35 +1,72 @@
-<!-- edit-profile.html -->
-
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>プロフィール編集</title>
-    <link rel="stylesheet" href="/css/edit-profile.css">
+    <link rel="stylesheet" href="/css/edit.css">
 </head>
 <body>
     <div class="header">
-        <div class="header-title">プロフィール編集</div>
-        <button class="back-btn" onclick="window.location.href='/success/${user.id}'">戻る</button>
+        <div class="header-title">My Portfolio</div>
+        <button class="login-btn" onclick="window.location.href='/logout'">ログアウト</button>
     </div>
 
     <div class="content">
-        <form th:action="@{'/users/edit/' + ${user.id}}" method="post" enctype="multipart/form-data">
-            <div>
-                <label for="profile">プロフィール:</label>
-                <textarea id="profile" name="profile" th:text="${user.profile}"></textarea>
-            </div>
-            <div>
-                <label for="profileImage">プロフィール画像:</label>
-                <input type="file" id="profileImage" name="profileImage" accept="image/*">
-            </div>
-            <button type="submit">更新</button>
-        </form>
+        <div class="title-container">
+            自己紹介を編集する
+        </div>
+
+        <div class="error-message" th:if="${errorMessage != null && !errorMessage.isEmpty()}">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <div class="main-container">
+            <form th:action="@{'/users/edit/' + ${user.id}}" th:object="${dto}" method="post" enctype="multipart/form-data">
+                <div class="textarea-wrapper">
+                    <div class="small-container">自己紹介文</div>
+                    <textarea class="textarea-placeholder" id="profile" name="profile" th:field="*{profile}"></textarea>
+                    <div class="bottom-container">
+                        50文字以上、200文字以下で入力してください。
+                    </div>
+                </div>
+
+                <div class="additional-container">
+                    <div class="top-left-container">アバター画像</div>
+                    
+                    <!-- input file は1つにする -->
+                    <input type="file" id="profileImage" name="profileImage" th:field="*{profileImage}" accept="image/*" style="display: none;" onchange="displayFileName()">
+                    <div class="button-wrapper">
+                        <button type="button" class="custom-button" onclick="document.getElementById('profileImage').click();">
+                            アバター画像を添付する
+                        </button>
+                        <div id="file-name" class="file-name-display"></div>
+                    </div>
+                    <!-- ファイル名表示用の要素 -->
+                </div>
+
+                <button type="submit" class="main-button">自己紹介を確定する</button>
+            </form>
+        </div>
     </div>
 
     <div class="footer">
         portfolio site
     </div>
+
+    <script>
+        function displayFileName() {
+            const fileInput = document.getElementById('profileImage');
+            const fileNameDisplay = document.getElementById('file-name');
+
+            if (fileInput.files && fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                fileNameDisplay.textContent = `選択されたファイル: ${fileName}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        }
+    </script>
+
 </body>
 </html>

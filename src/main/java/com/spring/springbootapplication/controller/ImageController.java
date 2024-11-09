@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.springbootapplication.entity.User;
 import com.spring.springbootapplication.service.UserService;
 
-// 画像取得用のAPI
+// 画像取得用のApi
 
 @RestController
 public class ImageController {
@@ -43,7 +43,7 @@ public class ImageController {
                     .contentType(MediaType.IMAGE_JPEG)
                     .body(defaultImage);
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

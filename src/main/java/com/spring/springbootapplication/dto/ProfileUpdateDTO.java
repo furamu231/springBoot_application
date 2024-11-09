@@ -7,7 +7,6 @@ public class ProfileUpdateDTO {
     private String profile;
     private MultipartFile profileImage;
 
-    // GetterとSetter
     public String getProfile() {
         return profile;
     }
