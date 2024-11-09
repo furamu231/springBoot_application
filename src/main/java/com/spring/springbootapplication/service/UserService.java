@@ -30,6 +30,11 @@ public class UserService implements UserDetailsService {
         userMapper.insertUser(user); 
         return user.getId();
     }
+    
+    public void updateUserProfile(User user) {
+        userMapper.updateUserProfile(user);
+    }
+
 
     public User findUserById(Integer id) {
         User user = userMapper.findById(id);

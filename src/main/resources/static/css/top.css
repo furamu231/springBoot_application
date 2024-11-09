@@ -159,14 +159,17 @@ body {
 
 .intro-secondary-container {
     width: 520px;
-    height: 81px;
-    background-color: transparent; 
+    height: auto; 
+    background-color: transparent;
     position: absolute;
-    top: 90px;    
+    top: 90px;
     left: 0;
     display: flex;
-    justify-content: flex-start; 
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    word-wrap: break-word;
+    word-break: break-all; 
+    overflow-wrap: anywhere; 
 }
      
 .intro-button {

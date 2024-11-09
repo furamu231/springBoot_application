@@ -28,6 +28,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                 .requestMatchers("/users/signup", "/users/signin", "/css/**").permitAll()
+                .requestMatchers("/users/edit/**").authenticated()  // 認証ユーザーにのみ許可
                 .requestMatchers("/users/success/**").authenticated()
                 .anyRequest().authenticated()
             )
