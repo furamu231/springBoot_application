@@ -15,7 +15,6 @@
         <div th:if="${errorMessage}" class="error-message">
             <p th:text="${errorMessage}"></p>
         </div>
-
         <form class="form-container" th:action="@{/users/signin}" method="post">
             <div class="form-group">
                 <label for="email">メールアドレス</label>
