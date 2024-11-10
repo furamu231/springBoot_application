@@ -1,0 +1,330 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    width: 100vw;
+    height: 1759px; 
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.header {
+    width: 100%;
+    height: 120px;
+    background-color: #1B5678;
+    color: white;
+    display: flex; 
+    align-items: center;
+    padding: 0 20px;
+    font-size: 36px;
+    position: relative;
+}
+
+.header-title.center-title {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.login-btn {
+    background-color: white;
+    color: #2c5670;
+    border: 1px solid #1B5678;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: auto; 
+}
+
+.login-btn:hover {
+    background-color: #1B5678;
+    color: white;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-grow: 1;
+}
+
+.btn-primary {
+    background-color: #1B5678;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 232px;
+    height: 53px;
+    margin-top: auto; 
+    align-self: center;
+}
+
+/* ここから */
+
+/* .main-container {
+    width: 100%;
+    max-width: 960px;
+    height: 1512px;
+    background-color: #e0f7fa;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pulldown-container {
+    width: 94px;
+    height: 44px;
+    background-color: #cce7ff; 
+    position: absolute;
+    top: 40px; 
+    left: 0;  
+}
+
+.sub-container {
+    width: 100%;
+    max-width: 960px;
+    height: 436px;
+    background-color: #f0e68c; 
+    position: absolute;
+    top: 124px; 
+    left: 0; 
+}
+
+.inner-container {
+    width: 880px;
+    height: 356px;
+    background-color: #d0f0c0; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header-container {
+    width: 880px;
+    height: 48px;
+    background-color: #b0c4de; 
+    position: absolute;
+    top: 0; 
+    left: 0; 
+}
+
+.left-box {
+    width: 240px;
+    height: 44px;
+    background-color: #ffa07a; 
+    position: absolute;
+    top: 0; 
+    left: 0; 
+}
+
+.right-button {
+    width: 178px;
+    height: 48px;
+    background-color: #87ceeb; 
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    top: 0; 
+    right: 0; 
+    text-align: center;
+    line-height: 48px; 
+    font-size: 16px;
+}
+
+.content-container {
+    width: 880px;
+    height: 276px;
+    background-color: #ffebcd;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+
+.top-box {
+    width: 880px;
+    height: 57px;
+    background-color: #add8e6;
+    display: flex;
+    flex-direction: row;
+}
+
+.top-box-item {
+    width: 220px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+}
+
+.middle-box {
+    width: 880px;
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: row;
+}
+.middle-box-item {
+    width: 220px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e6e6fa;
+    box-sizing: border-box;
+} */
+
+.main-container {
+    width: 100%;
+    max-width: 960px;
+    height: 1512px;
+    background-color: #e0f7fa;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pulldown-container {
+    width: 94px;
+    height: 44px;
+    background-color: #cce7ff;
+    position: absolute;
+    top: 40px;
+    left: 0;
+}
+
+.sub-container {
+    width: 100%;
+    max-width: 960px;
+    height: 436px;
+    background-color: #f0e68c;
+    position: absolute;
+    top: 124px;
+    left: 0;
+}
+
+.inner-container {
+    width: 880px;
+    height: 356px;
+    background-color: #d0f0c0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header-container {
+    width: 880px;
+    height: 48px;
+    background-color: #b0c4de;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.left-box {
+    width: 240px;
+    height: 44px;
+    background-color: #ffa07a;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.right-button {
+    width: 178px;
+    height: 48px;
+    background-color: #87ceeb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    line-height: 48px;
+    font-size: 16px;
+}
+
+/* 修正：content-container */
+.content-container {
+    width: 880px;
+    height: 276px;
+    background-color: #ffebcd;
+    position: absolute;
+    top: 80px; /* header-container (48px) + 32px の位置に配置 */
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* 修正：top-box */
+.top-box {
+    width: 880px;
+    height: 57px;
+    background-color: #add8e6;
+    margin-top: 32px; /* header-container から 32px 下に配置 */
+    display: flex;
+    flex-direction: row;
+}
+
+/* top-box-item の定義 */
+.top-box-item {
+    width: 220px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+}
+
+/* middle-box の定義 */
+.middle-box {
+    width: 880px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+/* middle-box-item の定義 */
+.middle-box-item {
+    width: 220px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e6e6fa;
+    box-sizing: border-box;
+}
+
+/* ここまで */
+
+.footer {
+    width: 100%;
+    height: 40px;
+    background-color: #1B5678;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    position: absolute; 
+    bottom: 0;
+    left: 0;
+}
