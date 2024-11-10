@@ -267,11 +267,12 @@ body {
     height: 276px;
     background-color: #ffebcd;
     position: absolute;
-    top: 80px; /* header-container (48px) + 32px の位置に配置 */
+    top: 80px;
     left: 0;
     display: flex;
     flex-direction: column;
     gap: 0;
+    overflow: hidden; /* スクロールが機能するように親要素に設定 */
 }
 
 /* 修正：top-box */
@@ -279,9 +280,9 @@ body {
     width: 880px;
     height: 57px;
     background-color: #add8e6;
-    margin-top: 32px; /* header-container から 32px 下に配置 */
     display: flex;
     flex-direction: row;
+    margin-top: 0; /* 余分なマージンを削除 */
 }
 
 /* top-box-item の定義 */
@@ -294,15 +295,23 @@ body {
     background-color: #f0f0f0;
 }
 
-/* middle-box の定義 */
+/* 新規追加：スクロール用の親コンテナ */
+.scroll-wrapper {
+    width: 880px;
+    height: 219px; /* content-container の残りの高さ */
+    overflow-y: auto; /* 縦スクロールを許可 */
+    padding-right: 10px; /* スクロールバーの表示に備えて */
+    box-sizing: border-box;
+}
+
+/* middle-box の修正 */
 .middle-box {
     width: 880px;
-    flex-grow: 1;
+    height: 73px; /* 明示的に高さを指定 */
     display: flex;
     flex-direction: row;
 }
 
-/* middle-box-item の定義 */
 .middle-box-item {
     width: 220px;
     height: 100%;
