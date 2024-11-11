@@ -93,10 +93,13 @@ body {
     width: 100%;
     max-width: 960px;
     height: 436px;
-    background-color: #f0e68c;
+    background-color: transparent;
+    border: 1px solid #ccc; /* 灰色の外枠を追加 */
+    border-radius: 4px; /* 角を丸くする */
     position: absolute;
     top: 124px;
     left: 0;
+    box-sizing: border-box; /* 枠線を含めてサイズを計算 */
 }
 
 .inner-container {
@@ -122,16 +125,18 @@ body {
     width: 240px;
     height: 44px;
     background-color: #ffa07a;
+    border-bottom: 2px solid #ccc; /* 下線のみ追加 */
     position: absolute;
     top: 0;
     left: 0;
+    box-sizing: border-box; /* サイズに影響しないように設定 */
 }
 
 .right-button {
     width: 178px;
     height: 48px;
-    background-color: #87ceeb;
-    color: #fff;
+    color: #fff; /* 背景色を白に変更 */
+    background-color: #1B5678; /* 文字色を変更 */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -143,27 +148,38 @@ body {
     font-size: 16px;
 }
 
-/* 修正：content-container */
+/* ホバースタイル（オプションで追加） */
+.right-button:hover {
+    background-color: #f0f0f0; /* ホバー時に少しグレーに */
+}
+
 .content-container {
     width: 880px;
     height: 276px;
-    background-color: #ffebcd;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     position: absolute;
     top: 80px;
     left: 0;
     display: flex;
     flex-direction: column;
     gap: 0;
-    overflow: hidden; /* スクロールが機能するように親要素に設定 */
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 
+        0px 1px 5px 0px #0000001F, /* 軽い影 */
+        0px 2px 2px 0px #00000024, /* 中程度の影 */
+        0px 3px 1px -2px #00000033; /* 深めの影 */
 }
 
-/* 修正：top-box */
 .top-box {
     width: 880px;
     height: 57px;
     background-color: #add8e6;
     display: flex;
     flex-direction: row;
+    border-bottom: 1px solid #ccc; /* 下部に灰色の区切り線を追加 */
 }
 
 .top-box-item {
@@ -171,11 +187,14 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    padding-left: 16px; /* テキストのスタート位置を調整 */
+    justify-content: flex-start;
+    padding-left: 16px;
     box-sizing: border-box;
-    color: #333;
-    font-size: 14px;
-    font-weight: bold; /* 太字で見やすく調整 */
+}
+
+/* 最後の項目の区切り線を削除 */
+.top-box-item:last-child {
+    border-right: none;
 }
 
 /* 新規追加：スクロール用の親コンテナ */
@@ -187,12 +206,24 @@ body {
     box-sizing: border-box;
 }
 
-/* middle-box の修正 */
+.scroll-wrapper {
+    width: 880px;
+    height: 219px;
+    overflow-y: auto;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
 .middle-box {
     width: 880px;
-    height: 73px; /* 明示的に高さを指定 */
+    height: 73px;
     display: flex;
     flex-direction: row;
+    border-bottom: 1px solid #ccc; /* 下に灰色の区切り線を追加 */
+}
+
+.middle-box:last-child {
+    border-bottom: none; /* 最後の .middle-box には区切り線を表示しない */
 }
 
 .middle-box-item {
@@ -200,24 +231,79 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start; 
-    padding-left: 16px; 
+    justify-content: flex-start;
+    padding-left: 16px;
     background-color: #e6e6fa;
     box-sizing: border-box;
 }
+
+/* .time-dropdown {
+    width: 160px;
+    height: 40px;
+    padding-left: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    box-sizing: border-box;
+    appearance: none;
+} */
 
 /* 学習時間のプルダウンメニュー */
 .time-dropdown {
     width: 160px;
     height: 40px;
-    padding-left: 16px; /* 学習時間の開始位置と揃える */
-    border: 1px solid #ccc; /* 灰色の枠線 */
-    border-radius: 4px; /* 角を丸くする */
+    padding-left: 12px;
+    padding-right: 36px; /* 右側にさらに余白を追加 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
     font-size: 14px;
     color: #333;
     background-color: #fff;
     box-sizing: border-box;
-    appearance: none; /* デフォルトの矢印をカスタマイズ可能にする */
+    appearance: none;
+}
+
+/* プルダウンメニューの矢印コンテナ */
+.dropdown-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.dropdown-arrow {
+    width: 24px;
+    height: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* 矢印がクリックをブロックしないように */
+}
+
+/* 上向きの三角形 */
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #333;
+    margin-bottom: 2px;
+}
+
+/* 下向きの三角形 */
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+    margin-top: 2px;
 }
 
 /* 保存ボタンのスタイル */
