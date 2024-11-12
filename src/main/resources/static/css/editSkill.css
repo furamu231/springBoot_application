@@ -74,13 +74,13 @@ body {
     width: 100%;
     max-width: 960px;
     height: 1512px;
-    background-color: #e0f7fa;
+    background-color: transparent;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.pulldown-container {
+/* .pulldown-container {
     width: 94px;
     height: 44px;
     background-color: #cce7ff;
@@ -122,7 +122,80 @@ body {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 8px solid #333;
-} 
+}  */
+
+/* プルダウンメニューコンテナ */
+.pulldown-container {
+    width: 94px;
+    height: 44px;
+    background-color: #cce7ff;
+    z-index: 100; /* より高い値に設定 */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 1px solid #ccc; /* 灰色のボーダーを追加 */
+    border-radius: 4px; /* 角丸を追加 */
+}
+
+/* テキストボックス */
+.pulldown-container > .text-box {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding-left: 16px;
+}
+
+/* 矢印 */
+.pulldown-container > .arrow-container {
+    width: 14px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pulldown-container > .arrow-container > .arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #333;
+}
+
+.pulldown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 1000;
+}
+
+/* メニューアイテム */
+.pulldown-menu .menu-item {
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+.pulldown-menu .menu-item:hover {
+    background-color: #f0f0f0;
+}
 
 
 .sub-container {
@@ -130,12 +203,17 @@ body {
     max-width: 960px;
     height: 436px;
     background-color: transparent;
-    border: 1px solid #ccc; /* 灰色の外枠を追加 */
-    border-radius: 4px; /* 角を丸くする */
-    position: absolute;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    position: relative; 
+    z-index: 1; /* z-index を低く設定 */
     top: 124px;
     left: 0;
-    box-sizing: border-box; /* 枠線を含めてサイズを計算 */
+    box-sizing: border-box; 
+}
+
+.sub-container.disabled {
+    pointer-events: none;
 }
 
 .inner-container {
