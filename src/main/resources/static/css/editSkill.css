@@ -74,129 +74,79 @@ body {
     width: 100%;
     max-width: 960px;
     height: 1512px;
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: rgba(173, 216, 230, 0.3); /* 薄い青で可視化 */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    display: flex; 
+    flex-direction: column; 
+    gap: 0; 
 }
 
-/* .pulldown-container {
+.dropdown-container {
+    position: relative;
     width: 94px;
     height: 44px;
     background-color: #cce7ff;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 8px;
-    box-sizing: border-box;
-}
-
-.pulldown-container > .text-box {
-    width: auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    padding-left: 16px;
-}
-
-.pulldown-container > .arrow-container {
-    width: 14px;
-    height: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    right: 12px;
-}
-
-.pulldown-container > .arrow-container > .arrow-down {
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid #333;
-}  */
-
-/* プルダウンメニューコンテナ */
-.pulldown-container {
-    width: 94px;
-    height: 44px;
-    background-color: #cce7ff;
-    z-index: 100; /* より高い値に設定 */
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 8px;
-    box-sizing: border-box;
-    cursor: pointer;
-    border: 1px solid #ccc; /* 灰色のボーダーを追加 */
-    border-radius: 4px; /* 角丸を追加 */
-}
-
-/* テキストボックス */
-.pulldown-container > .text-box {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    padding-left: 16px;
-}
-
-/* 矢印 */
-.pulldown-container > .arrow-container {
-    width: 14px;
-    height: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pulldown-container > .arrow-container > .arrow-down {
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid #333;
-}
-
-.pulldown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: none;
-    z-index: 1000;
-}
-
-/* メニューアイテム */
-.pulldown-menu .menu-item {
-    padding: 8px 12px;
-    font-size: 16px;
-    color: #333;
     cursor: pointer;
+    box-sizing: border-box;
+    top: 40px;
 }
 
-.pulldown-menu .menu-item:hover {
-    background-color: #f0f0f0;
+.month-dropdown {
+    width: 100%;
+    height: 100%;
+    padding-left: 12px;
+    padding-right: 36px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    background-color: #cce7ff;
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-sizing: border-box;
 }
 
+.dropdown-arrow {
+    width: 24px;
+    height: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; 
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #333;
+    margin-bottom: 2px;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+    margin-top: 2px;
+}
 
 .sub-container {
     width: 100%;
@@ -206,11 +156,13 @@ body {
     border: 1px solid #ccc; 
     border-radius: 4px; 
     position: relative; 
-    z-index: 1; /* z-index を低く設定 */
+    z-index: 1; 
     top: 124px;
     left: 0;
     box-sizing: border-box; 
+    overflow: visible;
 }
+
 
 .sub-container.disabled {
     pointer-events: none;
@@ -239,18 +191,41 @@ body {
     width: 240px;
     height: 44px;
     background-color: #ffa07a;
-    border-bottom: 2px solid #ccc; /* 下線のみ追加 */
+    border-bottom: 2px solid #ccc; 
     position: absolute;
     top: 0;
     left: 0;
-    box-sizing: border-box; /* サイズに影響しないように設定 */
+    box-sizing: border-box; 
+}
+
+.category-container {
+    width: 168px;
+    height: 28px;
+    background-color: #add8e6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center; /* 縦中央揃え */
+    /* padding-left: 4px;  */
+}
+
+
+.category-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .right-button {
     width: 178px;
     height: 48px;
-    color: #fff; /* 背景色を白に変更 */
-    background-color: #1B5678; /* 文字色を変更 */
+    color: #fff; 
+    background-color: #1B5678; 
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -262,9 +237,8 @@ body {
     font-size: 16px;
 }
 
-/* ホバースタイル（オプションで追加） */
 .right-button:hover {
-    background-color: #f0f0f0; /* ホバー時に少しグレーに */
+    background-color: #f0f0f0; 
 }
 
 .content-container {
@@ -279,12 +253,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow: visible;
     box-sizing: border-box;
     box-shadow: 
-        0px 1px 5px 0px #0000001F, /* 軽い影 */
-        0px 2px 2px 0px #00000024, /* 中程度の影 */
-        0px 3px 1px -2px #00000033; /* 深めの影 */
+        0px 1px 5px 0px #0000001F, 
+        0px 2px 2px 0px #00000024, 
+        0px 3px 1px -2px #00000033; 
 }
 
 .top-box {
@@ -293,7 +268,7 @@ body {
     background-color: #add8e6;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #ccc; /* 下部に灰色の区切り線を追加 */
+    border-bottom: 1px solid #ccc; 
 }
 
 .top-box-item {
@@ -306,17 +281,15 @@ body {
     box-sizing: border-box;
 }
 
-/* 最後の項目の区切り線を削除 */
 .top-box-item:last-child {
     border-right: none;
 }
 
-/* 新規追加：スクロール用の親コンテナ */
 .scroll-wrapper {
     width: 880px;
-    height: 219px; /* content-container の残りの高さ */
-    overflow-y: auto; /* 縦スクロールを許可 */
-    padding-right: 10px; /* スクロールバーの表示に備えて */
+    height: 219px; 
+    overflow-y: auto; 
+    padding-right: 10px; 
     box-sizing: border-box;
 }
 
@@ -333,11 +306,11 @@ body {
     height: 73px;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #ccc; /* 下に灰色の区切り線を追加 */
+    border-bottom: 1px solid #ccc; 
 }
 
 .middle-box:last-child {
-    border-bottom: none; /* 最後の .middle-box には区切り線を表示しない */
+    border-bottom: none; 
 }
 
 .middle-box-item {
@@ -351,25 +324,11 @@ body {
     box-sizing: border-box;
 }
 
-/* .time-dropdown {
-    width: 160px;
-    height: 40px;
-    padding-left: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #333;
-    background-color: #fff;
-    box-sizing: border-box;
-    appearance: none;
-} */
-
-/* 学習時間のプルダウンメニュー */
 .time-dropdown {
     width: 160px;
     height: 40px;
     padding-left: 12px;
-    padding-right: 36px; /* 右側にさらに余白を追加 */
+    padding-right: 36px; 
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
@@ -379,7 +338,6 @@ body {
     appearance: none;
 }
 
-/* プルダウンメニューの矢印コンテナ */
 .dropdown-wrapper {
     position: relative;
     display: inline-flex;
@@ -397,10 +355,9 @@ body {
     right: 2px;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none; /* 矢印がクリックをブロックしないように */
+    pointer-events: none; 
 }
 
-/* 上向きの三角形 */
 .arrow-up {
     width: 0;
     height: 0;
@@ -410,7 +367,6 @@ body {
     margin-bottom: 2px;
 }
 
-/* 下向きの三角形 */
 .arrow-down {
     width: 0;
     height: 0;
@@ -420,7 +376,6 @@ body {
     margin-top: 2px;
 }
 
-/* 保存ボタンのスタイル */
 .save-button {
     width: 158px;
     height: 32px;
@@ -436,12 +391,10 @@ body {
     box-sizing: border-box;
 }
 
-/* ボタンのホバー時のスタイル */
 .save-button:hover {
     background-color: #f0f0f0;
 }
 
-/* 削除ボタンのスタイル */
 .delete-button {
     width: 88px;
     height: 32px;
@@ -451,21 +404,16 @@ body {
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-    /* position: absolute; */
-    margin-left: 16px; /* 左から 16px の位置に配置 */
+    margin-left: 16px; 
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
 }
 
-
-/* 削除ボタンのホバースタイル */
 .delete-button:hover {
     background-color: #D85858;
 }
-
-/* ここまで */
 
 .footer {
     width: 100%;
@@ -479,4 +427,12 @@ body {
     position: absolute; 
     bottom: 0;
     left: 0;
+}
+
+.spacer-container {
+    width: 100%;
+    max-width: 560px;
+    height: 40px;
+    background-color: #e6f7ff; 
+    box-sizing: border-box;
 }
