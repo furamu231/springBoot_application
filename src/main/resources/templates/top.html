@@ -31,6 +31,12 @@
                 <a class="intro-button" th:href="@{/users/edit/{id}(id=${user.id})}">自己紹介を編集する</a>
             </div>
         </div>
+        <div class="sub-box">
+            <div class="inner-box">
+                <div class="title-box">学習チャート</div>
+            </div>
+            <a class="action-button" th:href="@{/users/editSkill/{id}(id=${user.id})}">編集する</a>
+        </div>
     </div>
     <div class="footer">
         portfolio site
