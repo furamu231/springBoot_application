@@ -118,14 +118,10 @@ public class UserController {
     }
 
     @GetMapping("/editSkill/{id}")
-public String showEditSkillForm(@PathVariable Integer id, Model model) {
-    User user = userService.findUserById(id);
-    model.addAttribute("user", user);
+    public String showEditSkillForm(@PathVariable Integer id, Model model) {
+        User user = userService.findUserById(id);
+        model.addAttribute("user", user);
 
-    // 必要に応じて DTO オブジェクトを作成して渡すこともできます
-    // SkillEditDTO dto = new SkillEditDTO();
-    // model.addAttribute("dto", dto);
-
-    return "editSkill";
-}
+        return "editSkill";
+    }
 }

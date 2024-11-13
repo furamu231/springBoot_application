@@ -74,8 +74,7 @@ body {
     width: 100%;
     max-width: 960px;
     height: 1512px;
-    /* background-color: transparent; */
-    background-color: rgba(173, 216, 230, 0.3); /* 薄い青で可視化 */
+    background-color: transparent;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -88,7 +87,7 @@ body {
     position: relative;
     width: 94px;
     height: 44px;
-    background-color: #cce7ff;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,19 +96,20 @@ body {
     cursor: pointer;
     box-sizing: border-box;
     top: 40px;
+    margin-bottom: 40px;
 }
 
 .month-dropdown {
     width: 100%;
     height: 100%;
     padding-left: 12px;
-    padding-right: 36px;
+    padding-right: 36px;  
     border: none;
     border-radius: 4px;
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    background-color: #cce7ff;
+    background-color: transparent;
     appearance: none; 
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -153,16 +153,13 @@ body {
     max-width: 960px;
     height: 436px;
     background-color: transparent;
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-    position: relative; 
-    z-index: 1; 
-    top: 124px;
-    left: 0;
-    box-sizing: border-box; 
-    overflow: visible;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    margin-top: 40px;
 }
-
 
 .sub-container.disabled {
     pointer-events: none;
@@ -171,7 +168,7 @@ body {
 .inner-container {
     width: 880px;
     height: 356px;
-    background-color: #d0f0c0;
+    background-color: transparent;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -181,7 +178,7 @@ body {
 .header-container {
     width: 880px;
     height: 48px;
-    background-color: #b0c4de;
+    background-color: transparent;
     position: absolute;
     top: 0;
     left: 0;
@@ -190,7 +187,7 @@ body {
 .left-box {
     width: 240px;
     height: 44px;
-    background-color: #ffa07a;
+    background-color: transparent;
     border-bottom: 2px solid #ccc; 
     position: absolute;
     top: 0;
@@ -201,14 +198,13 @@ body {
 .category-container {
     width: 168px;
     height: 28px;
-    background-color: #add8e6;
+    background-color: transparent;
     position: absolute;
     top: 0;
     left: 0;
     box-sizing: border-box;
     display: flex;
-    align-items: center; /* 縦中央揃え */
-    /* padding-left: 4px;  */
+    align-items: center; 
 }
 
 
@@ -237,8 +233,10 @@ body {
     font-size: 16px;
 }
 
+/* ホバー時のスタイル */
 .right-button:hover {
-    background-color: #f0f0f0; 
+    background-color: #2c78a0; /* 少し明るめのブルーに変更 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* シャドウ効果を追加 */
 }
 
 .content-container {
@@ -253,7 +251,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0;
-    /* overflow: hidden; */
     overflow: visible;
     box-sizing: border-box;
     box-shadow: 
@@ -265,7 +262,7 @@ body {
 .top-box {
     width: 880px;
     height: 57px;
-    background-color: #add8e6;
+    background-color: transparent;
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #ccc; 
@@ -309,9 +306,9 @@ body {
     border-bottom: 1px solid #ccc; 
 }
 
-.middle-box:last-child {
+/* .middle-box:last-child {
     border-bottom: none; 
-}
+} */
 
 .middle-box-item {
     width: 220px;
@@ -320,7 +317,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     padding-left: 16px;
-    background-color: #e6e6fa;
+    background-color: transparent;
     box-sizing: border-box;
 }
 
@@ -333,7 +330,7 @@ body {
     border-radius: 4px;
     font-size: 14px;
     color: #333;
-    background-color: #fff;
+    background-color: transparent;
     box-sizing: border-box;
     appearance: none;
 }
@@ -427,12 +424,4 @@ body {
     position: absolute; 
     bottom: 0;
     left: 0;
-}
-
-.spacer-container {
-    width: 100%;
-    max-width: 560px;
-    height: 40px;
-    background-color: #e6f7ff; 
-    box-sizing: border-box;
 }
