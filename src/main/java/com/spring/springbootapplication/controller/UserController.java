@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.springbootapplication.dto.LearningDataDTO;
 import com.spring.springbootapplication.dto.ProfileUpdateDTO;
 import com.spring.springbootapplication.dto.UserSignUpDTO;
 import com.spring.springbootapplication.entity.User;
@@ -124,4 +125,53 @@ public class UserController {
 
         return "editSkill";
     }
+
+    @GetMapping("/addSkill/{category}/{id}")
+    public String showAddSkillForm(@PathVariable String category,
+                                   @PathVariable Integer id,
+                                   Model model) {
+        if (!category.equals("Backend") && !category.equals("Frontend") && !category.equals("Infra")) {
+            return "error/404";
+        }
+
+        model.addAttribute("category", category);
+        model.addAttribute("userId", id);
+
+        LearningDataDTO dto = new LearningDataDTO();
+        model.addAttribute("dto", dto);
+
+        return "addSkill";
+    }
+
+//     @PostMapping("/addSkill")
+//         public String addSkill(@ModelAttribute LearningDataDTO dto,
+//                        @RequestParam String category,
+//                        @RequestParam Integer userId,
+//                        RedirectAttributes redirectAttributes) {
+//     try {
+//         // カテゴリIDの取得
+//         Integer categoryId = userService.findCategoryIdByName(category);
+//         if (categoryId == null) {
+//             redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
+//             return "redirect:/addSkill/" + category + "/" + userId;
+//         }
+
+//         // DTOからエンティティを作成
+//         LearningDataDTO learningData = new LearningDataDTO();
+//         learningData.setLearningDataName(dto.getLearningDataName());
+//         learningData.setLearningTime(dto.getLearningTime());
+//         learningData.setCategoryId(categoryId);
+//         learningData.setUserId(userId);
+
+//         // データを保存
+//         userService.saveLearningData(learningData);
+
+//         redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
+//         return "redirect:/editSkill/" + userId;
+
+//     } catch (Exception e) {
+//         redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
+//         return "redirect:/addSkill/" + category + "/" + userId;
+//     }
+//    }
 }

@@ -33,7 +33,7 @@
                                 <span class="category-text">バックエンド</span>
                             </div>
                         </div>
-                        <button class="right-button">項目を追加する</button>
+                        <a class="right-button" th:href="@{'/users/addSkill/Backend/' + ${id}}">項目を追加する</a>
                     </div>
                     <div class="content-container">
                         <div class="top-box">
@@ -100,7 +100,7 @@
                                 <span class="category-text">フロントエンド</span>
                             </div>
                         </div>
-                        <button class="right-button">項目を追加する</button>
+                        <a class="right-button" th:href="@{'/users/addSkill/Frontend/' + ${id}}">項目を追加する</a>
                     </div>
                     <div class="content-container">
                         <div class="top-box">
@@ -167,7 +167,7 @@
                                 <span class="category-text">インフラ</span>
                             </div>
                         </div>
-                        <button class="right-button">項目を追加する</button>
+                        <a class="right-button" th:href="@{'/users/addSkill/Infra/' + ${id}}">項目を追加する</a>
                     </div>
                     <div class="content-container">
                         <div class="top-box">
