@@ -110,12 +110,18 @@ public class UserController {
             }
 
             userService.updateUserProfile(user);
-            // redirectAttributes.addFlashAttribute("successMessage", "プロフィールが更新されました");
             return "redirect:/users/success/" + id;
 
         } catch (IOException e) {
-            // redirectAttributes.addFlashAttribute("errorMessage", "プロフィールの更新に失敗しました");
             return "redirect:/users/edit/" + id;
         }
+    }
+
+    @GetMapping("/editSkill/{id}")
+    public String showEditSkillForm(@PathVariable Integer id, Model model) {
+        User user = userService.findUserById(id);
+        model.addAttribute("user", user);
+
+        return "editSkill";
     }
 }

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>トップページ</title>
+    <link rel="stylesheet" href="/css/editSkill.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">My Portfolio</div>
+        <button class="login-btn" onclick="window.location.href='/logout'">ログアウト</button>
+    </div>
+    <div class="content">
+        <div class="main-container">
+            <div class="dropdown-container">
+                <select class="month-dropdown">
+                    <option value="9月">11月</option>
+                    <option value="8月">10月</option>
+                    <option value="7月">9月</option>
+                </select>
+                <div class="dropdown-arrow">
+                    <div class="arrow-up"></div>
+                    <div class="arrow-down"></div>
+                </div>
+            </div>
+            <div class="sub-container">
+                <div class="inner-container">
+                    <div class="header-container">
+                        <div class="left-box">
+                            <div class="category-container">
+                                <span class="category-text">バックエンド</span>
+                            </div>
+                        </div>
+                        <button class="right-button">項目を追加する</button>
+                    </div>
+                    <div class="content-container">
+                        <div class="top-box">
+                            <div class="top-box-item">項目名</div>
+                            <div class="top-box-item">学習時間</div>
+                        </div>
+                        <div class="scroll-wrapper">
+                            <div class="middle-box">
+                                <div class="middle-box-item">Ruby</div>
+                                <div class="middle-box-item">
+                                    <div class="dropdown-wrapper">
+                                        <div class="dropdown-arrow">
+                                            <div class="arrow-up"></div>
+                                            <div class="arrow-down"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                            <div class="middle-box">
+                                <div class="middle-box-item">Rails</div>
+                                <div class="middle-box-item"></div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                            <div class="middle-box">
+                                <div class="middle-box-item">MySQL</div>
+                                <div class="middle-box-item"></div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                            <div class="middle-box">
+                                <div class="middle-box-item">Java</div>
+                                <div class="middle-box-item"></div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-container">
+                <div class="inner-container">
+                    <div class="header-container">
+                        <div class="left-box">
+                            <div class="category-container">
+                                <span class="category-text">フロントエンド</span>
+                            </div>
+                        </div>
+                        <button class="right-button">項目を追加する</button>
+                    </div>
+                    <div class="content-container">
+                        <div class="top-box">
+                            <div class="top-box-item">項目名</div>
+                            <div class="top-box-item">学習時間</div>
+                        </div>
+                        <div class="scroll-wrapper">
+                            <div class="middle-box">
+                                <div class="middle-box-item">JavaScript</div>
+                                <div class="middle-box-item">
+                                    <div class="dropdown-wrapper">
+                                        <div class="dropdown-arrow">
+                                            <div class="arrow-up"></div>
+                                            <div class="arrow-down"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                            <!-- <div class="middle-box">
+                                <div class="middle-box-item">Rails</div>
+                                <div class="middle-box-item"></div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div> -->
+                            <div class="middle-box">
+                                <div class="middle-box-item">HTML</div>
+                                <div class="middle-box-item"></div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                            <div class="middle-box">
+                                <div class="middle-box-item">CSS</div>
+                                <div class="middle-box-item"></div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-container">
+                <div class="inner-container">
+                    <div class="header-container">
+                        <div class="left-box">
+                            <div class="category-container">
+                                <span class="category-text">インフラ</span>
+                            </div>
+                        </div>
+                        <button class="right-button">項目を追加する</button>
+                    </div>
+                    <div class="content-container">
+                        <div class="top-box">
+                            <div class="top-box-item">項目名</div>
+                            <div class="top-box-item">学習時間</div>
+                        </div>
+                        <div class="scroll-wrapper">
+                            <div class="middle-box">
+                                <div class="middle-box-item">AWS</div>
+                                <div class="middle-box-item">
+                                    <div class="dropdown-wrapper">
+                                        <div class="dropdown-arrow">
+                                            <div class="arrow-up"></div>
+                                            <div class="arrow-down"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                            <div class="middle-box">
+                                <div class="middle-box-item">Heroku</div>
+                                <div class="middle-box-item"></div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div>
+                            <!-- <div class="middle-box">
+                                <div class="middle-box-item">MySQL</div>
+                                <div class="middle-box-item"></div>
+                                <div class="middle-box-item">
+                                    <button class="save-button">学習時間を保存する</button>
+                                </div>
+                                <div class="middle-box-item">
+                                    <button class="delete-button">削除</button>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div> <!-- main-container の終了 -->
+    </div> <!-- content の終了 -->
+    <div class="footer">
+        portfolio site
+    </div>
+    <script src="/js/timePulldown.js"></script>
+    <script src="/js/monthPulldown.js"></script>
+</body>
+</html>
