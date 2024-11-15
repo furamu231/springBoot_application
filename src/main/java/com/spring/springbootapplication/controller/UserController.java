@@ -1,6 +1,8 @@
 package com.spring.springbootapplication.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.springbootapplication.dto.LearningDataDTO;
 import com.spring.springbootapplication.dto.ProfileUpdateDTO;
 import com.spring.springbootapplication.dto.UserSignUpDTO;
+import com.spring.springbootapplication.entity.LearningData;
 import com.spring.springbootapplication.entity.User;
+import com.spring.springbootapplication.service.LearningService;
 import com.spring.springbootapplication.service.UserService;
 
 import jakarta.servlet.ServletException;
@@ -29,9 +33,11 @@ import jakarta.validation.Valid;
 public class UserController {
 
     private final UserService userService;
+    private final LearningService learningService;;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, LearningService learningService) {
         this.userService = userService;
+        this.learningService = learningService;
     }
 
     @GetMapping("/signup") 
@@ -118,16 +124,53 @@ public class UserController {
         }
     }
 
+
+
+
+
+
+
+    // ここから検索ソート
+
+    // @GetMapping("/editSkill/{id}")
+    //     public String showEditSkillForm(@PathVariable Integer id, Model model) {
+    //         User user = userService.findUserById(id);
+    //         model.addAttribute("user", user);
+
+    //       // ユーザーのバックエンドカテゴリの学習データを取得
+    //         List<LearningData> backendSkills = learningService.findLearningDataByCategoryAndUser("Backend", id);
+    //         model.addAttribute("backendSkills", backendSkills);
+
+    //         return "editSkill";
+    //     }
+
     @GetMapping("/editSkill/{id}")
-    public String showEditSkillForm(@PathVariable Integer id, Model model) {
+    public String showEditSkillForm(@PathVariable Integer id,
+                                @RequestParam(required = false) String month,
+                                Model model) {
+        // ユーザー情報を取得
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
+
+        // 月が指定されていない場合、当月をデフォルトに設定
+        if (month == null) {
+            month = LocalDate.now().toString().substring(0, 7); // "YYYY-MM" 形式
+        } 
+
+        // 指定された月のバックエンドカテゴリの学習データを取得
+        List<LearningData> backendSkills = learningService.findLearningDataByMonthAndUser("Backend", id, month);
+        model.addAttribute("backendSkills", backendSkills);
+        model.addAttribute("selectedMonth", month);
 
         return "editSkill";
     }
 
+    // ここまで
+
+    
+
     @GetMapping("/addSkill/{category}/{id}")
-    public String showAddSkillForm(@PathVariable String category,
+        public String showAddSkillForm(@PathVariable String category,
                                    @PathVariable Integer id,
                                    Model model) {
         if (!category.equals("Backend") && !category.equals("Frontend") && !category.equals("Infra")) {
@@ -135,7 +178,7 @@ public class UserController {
         }
 
         model.addAttribute("category", category);
-        model.addAttribute("userId", id);
+        model.addAttribute("id", id);
 
         LearningDataDTO dto = new LearningDataDTO();
         model.addAttribute("dto", dto);
@@ -143,35 +186,33 @@ public class UserController {
         return "addSkill";
     }
 
-//     @PostMapping("/addSkill")
-//         public String addSkill(@ModelAttribute LearningDataDTO dto,
-//                        @RequestParam String category,
-//                        @RequestParam Integer userId,
-//                        RedirectAttributes redirectAttributes) {
-//     try {
-//         // カテゴリIDの取得
-//         Integer categoryId = userService.findCategoryIdByName(category);
-//         if (categoryId == null) {
-//             redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
-//             return "redirect:/addSkill/" + category + "/" + userId;
-//         }
+    @PostMapping("/addSkill/{category}/{id}")
+    public String addSkill(
+        @ModelAttribute LearningDataDTO dto,
+        @PathVariable String category,
+        @PathVariable Integer id,
+        RedirectAttributes redirectAttributes) {
+        try {
+            // カテゴリIDの取得
+            Integer categoryId = learningService.findCategoryIdByName(category);
+            if (categoryId == null) {
+                redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
+                return "redirect:/users/addSkill/" + category + "/" + id;
+            }
 
-//         // DTOからエンティティを作成
-//         LearningDataDTO learningData = new LearningDataDTO();
-//         learningData.setLearningDataName(dto.getLearningDataName());
-//         learningData.setLearningTime(dto.getLearningTime());
-//         learningData.setCategoryId(categoryId);
-//         learningData.setUserId(userId);
+            // DTOからエンティティを作成
+            dto.setCategoryId(categoryId);
+            dto.setUserId(id);
 
-//         // データを保存
-//         userService.saveLearningData(learningData);
+            // データを保存
+            learningService.saveLearningData(dto);
 
-//         redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
-//         return "redirect:/editSkill/" + userId;
+            redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
+            return "redirect:/users/editSkill/" + id;
 
-//     } catch (Exception e) {
-//         redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
-//         return "redirect:/addSkill/" + category + "/" + userId;
-//     }
-//    }
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
+            return "redirect:/users/addSkill/" + category + "/" + id;
+        }
+    }
 }

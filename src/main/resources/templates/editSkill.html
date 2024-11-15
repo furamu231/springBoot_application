@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
+    <input type="hidden" id="user-id" th:value="${user.id}">
     <div class="header">
         <div class="header-title">My Portfolio</div>
         <button class="login-btn" onclick="window.location.href='/logout'">ログアウト</button>
@@ -15,16 +16,23 @@
     <div class="content">
         <div class="main-container">
             <div class="dropdown-container">
-                <select class="month-dropdown">
+                <!-- <select class="month-dropdown">
                     <option value="9月">11月</option>
                     <option value="8月">10月</option>
                     <option value="7月">9月</option>
-                </select>
+                </select> -->
+                <select id="month-dropdown" class="month-dropdown"></select>
+                <div class="dropdown-arrow">
+                    <div class="arrow-up"></div>
+                    <div class="arrow-down"></div>
+                </div>
                 <div class="dropdown-arrow">
                     <div class="arrow-up"></div>
                     <div class="arrow-down"></div>
                 </div>
             </div>
+
+
             <div class="sub-container">
                 <div class="inner-container">
                     <div class="header-container">
@@ -41,24 +49,46 @@
                             <div class="top-box-item">学習時間</div>
                         </div>
                         <div class="scroll-wrapper">
-                            <div class="middle-box">
-                                <div class="middle-box-item">Ruby</div>
+                        
+                            <div th:each="skill : ${backendSkills}" class="middle-box">
+                                <!-- 学習項目名の表示 -->
+                                <div class="middle-box-item" th:text="${skill.learningDataName}"></div>
+                            
+                                <!-- ドロップダウンメニュー -->
                                 <div class="middle-box-item">
+                                    <!-- <div class="dropdown-wrapper">
+                                        <div class="dropdown-arrow">
+                                            <div class="arrow-up"></div>
+                                            <div class="arrow-down"></div>
+                                        </div>
+                                    </div> -->
                                     <div class="dropdown-wrapper">
+                                        <select class="time-dropdown">
+                                            <!-- 1 から 180 までのオプションを生成し、初期値をサーバーサイドから設定 -->
+                                            <option th:each="i : ${#numbers.sequence(1, 180)}"
+                                                    th:value="${i}"
+                                                    th:text="${i}"
+                                                    th:selected="${i} == ${skill.learningTime}">
+                                            </option>
+                                        </select>
                                         <div class="dropdown-arrow">
                                             <div class="arrow-up"></div>
                                             <div class="arrow-down"></div>
                                         </div>
                                     </div>
                                 </div>
+                            
+                                <!-- 保存ボタン -->
                                 <div class="middle-box-item">
-                                    <button class="save-button">学習時間を保存する</button>
+                                    <button class="save-button" th:attr="data-id=${skill.id}">学習時間を保存する</button>
                                 </div>
+                            
+                                <!-- 削除ボタン -->
                                 <div class="middle-box-item">
-                                    <button class="delete-button">削除</button>
+                                    <button class="delete-button" th:attr="data-id=${skill.id}">削除</button>
                                 </div>
                             </div>
-                            <div class="middle-box">
+                            <!-- <div class="middle-box">
                                 <div class="middle-box-item">Rails</div>
                                 <div class="middle-box-item"></div>
                                 <div class="middle-box-item">
@@ -87,11 +117,15 @@
                                 <div class="middle-box-item">
                                     <button class="delete-button">削除</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+
             <div class="sub-container">
                 <div class="inner-container">
                     <div class="header-container">
@@ -221,7 +255,8 @@
     <div class="footer">
         portfolio site
     </div>
-    <script src="/js/timePulldown.js"></script>
+    <!-- <script src="/js/timePulldown.js"></script> -->
     <script src="/js/monthPulldown.js"></script>
+    <input type="hidden" id="user-id" th:value="${user.id}">
 </body>
 </html>
