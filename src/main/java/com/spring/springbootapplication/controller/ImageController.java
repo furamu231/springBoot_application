@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.springbootapplication.entity.User;
 import com.spring.springbootapplication.service.UserService;
 
-// 画像取得用のApi
+// 画像取得用のapi
 
 @RestController
 public class ImageController {
