@@ -168,10 +168,10 @@ public class UserController {
         String japaneseCategory;
 
         // 個人開発15までにwarning解消すること
-        
+
         switch (category) {
             case "Backend":
-                japaneseCategory = "バックエンド";
+            japaneseCategory = "バックエンド";
                 break;
             case "Frontend":
                 japaneseCategory = "フロントエンド";
