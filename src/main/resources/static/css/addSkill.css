@@ -76,7 +76,7 @@ body {
     transform: translateX(-50%);
     width: 480px;
     height: 268px;
-    background-color: transparent; /* 識別用の背景色 (淡い水色) */
+    background-color: transparent; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,51 +85,50 @@ body {
 
 .child-container {
     position: absolute;
-    top: 0; /* 親コンテナの上部にピッタリと配置 */
+    top: 0;
     left: 0;
     width: 480px;
     height: 48px;
-    background-color: transparent; /* 子コンテナの背景色 (少し濃い水色) */
-    border-bottom: 1px solid #ccc; /* 下底部分の1px灰色ボーダー */
+    background-color: transparent; 
+    border-bottom: 1px solid #ccc; 
 }
 
 .top-left-container {
     position: absolute;
     top: 0;
-    left: 8px; /* 左側に余白を追加 */
+    left: 8px;
     width: 37px;
     height: 12px;
-    background-color: transparent; /* 背景を透明に */
-    color: #808080; /* テキストの色: 灰色 */
-    font-size: 12px; /* テキストサイズ: 12px */
+    background-color: transparent; 
+    color: #808080; 
+    font-size: 12px; 
     display: flex;
-    justify-content: flex-start; /* 左揃えに変更 */
+    justify-content: flex-start; 
     align-items: center;
-    z-index: 1; /* ラベルを前面に表示 */
+    z-index: 1; 
 }
 
 .learning-data-input {
     position: relative;
-    margin-top: 12px; /* 項目名ラベルとの間隔を調整 */
-    padding-left: 4px; /* 左側に4pxの余白を追加 */
-    width: 480px; /* 親コンテナと同じ幅 */
+    margin-top: 12px; 
+    padding-left: 4px; 
+    width: 480px;
     height: 36px;
     border: none;
-    background-color: transparent; /* フォームの背景を透明に */
+    background-color: transparent; 
     font-size: 14px;
     color: #333;
-    outline: none; /* フォーカス時のアウトラインを消す */
-    z-index: 0; /* 入力フォームを背面に表示 */
+    outline: none; 
+    z-index: 0; 
 }
 
-/* 新しい子コンテナ (下に配置される) */
 .child-container-bottom {
     position: absolute;
-    top: 88px; /* 上の子コンテナ (48px) + 下に40pxのスペース */
+    top: 88px;
     left: 0;
     width: 480px;
     height: 71px;
-    background-color: transparent; /* 識別用の背景色 (淡い緑色) */
+    background-color: transparent; 
 }
 
 .inner-top-container {
@@ -138,15 +137,14 @@ body {
     left: 0;
     width: 480px;
     height: 48px;
-    background-color: transparent; /* 背景を透明に設定 */
+    background-color: transparent; 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 4px; /* 内側に少し余白を追加 */
+    padding: 4px; 
     border-bottom: 1px solid #ccc;
 }
 
-/* 左上角に配置する "学習時間" ラベル */
 .top-left-learning-time {
     position: relative;
     top: 0;
@@ -154,18 +152,17 @@ body {
     width: 49px;
     height: 12px;
     background-color: transparent;
-    color: #808080; /* テキストの色: 灰色 */
+    color: #808080; 
     font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* 学習時間の入力フォーム */
 .learning-time-input {
     position: relative;
-    margin-top: 8px; /* ラベルとの間隔を調整 */
-    margin-bottom: 12px; /* アンダーラインとの間隔を広げる */
+    margin-top: 8px; 
+    margin-bottom: 12px; 
     width: 480px;
     height: 36px;
     border: none;
@@ -175,14 +172,13 @@ body {
     outline: none;
 }
 
-/* 新しい下底コンテナ */
 .bottom-container {
     position: absolute;
-    bottom: 0; /* 親コンテナの下底にピッタリ配置 */
+    bottom: 0; 
     left: 0;
     width: 480px;
     height: 20px;
-    background-color: transparent; /* 識別用の背景色 (淡いベージュ) */
+    background-color: transparent; 
 }
 
 .left-hint-container {
@@ -194,43 +190,32 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    color: #808080; /* テキストの色: 灰色 */
-    font-size: 12px; /* テキストサイズ: 12px */
+    color: #808080; 
+    font-size: 12px; 
     font-weight: normal;
 }
 
 .button-container {
     position: absolute;
-    bottom: 0; /* 親コンテナの下底にピッタリ配置 */
+    bottom: 0; 
     left: 50%;
     transform: translateX(-50%);
     width: 232px;
     height: 53px;
-    background-color: #1B5678; /* 背景色を濃い青色に変更 */
+    background-color: #1B5678; 
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 4px; /* 角丸を4pxに変更 */
+    border-radius: 4px; 
     cursor: pointer;
     font-size: 18px;
-    color: #fff; /* テキストの色を白色に変更 */
+    color: #fff; 
     transition: background-color 0.3s;
 }
 
 .button-container:hover {
-    background-color: #154c67; /* ホバー時の背景色 (少し暗めの青色) */
+    background-color: #154c67; 
 }
-
-/* .footer {
-    width: 100%;
-    height: 40px;
-    background-color: #1B5678;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-} */
 
 .footer {
     width: 100%;
@@ -241,5 +226,5 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    margin-top: auto; /* フッターを最下部に配置 */
+    margin-top: auto; 
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.springbootapplication.dto.LearningDataResponse;
 import com.spring.springbootapplication.service.LearningService;
 
+// ここでモーダル用のjson返す
+
 @RestController
 @RequestMapping("/api/skills")
 public class SkillRestController {

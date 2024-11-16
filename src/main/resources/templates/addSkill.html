@@ -1,115 +1,3 @@
-<!-- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スキル登録</title>
-    <link rel="stylesheet" href="/css/addSkill.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            width: 300px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .close-btn {
-            margin-top: 10px;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-   
-    <div class="header">
-        <div class="header-title">My Portfolio</div>
-        <a href="/logout" class="login-btn">ログアウト</a>
-    </div>
-        <div class="center-container" th:text="${category} + 'に項目を追加'"></div>
-        <div class="form-container">
-            <div class="child-container">
-                <div class="top-left-container">項目名</div>
-                <input type="text" id="learningDataName" name="learningDataName" class="learning-data-input" required>
-            </div>
-            <div class="child-container-bottom">
-                <div class="inner-top-container">
-                    <div class="top-left-learning-time">学習時間</div>
-                    <input type="number" id="learningTime" name="learningTime" class="learning-time-input" required min="1">
-                </div>
-                <div class="bottom-container">
-                    <div class="left-hint-container">分単位で入力してください</div>
-                </div>
-            </div>
-            <div class="button-container" id="registerButton">
-                追加する
-            </div>
-        </div> 
-    
-    
-
-    <div class="footer">
-        portfolio site
-    </div>
-
-    <script>
-        $(document).ready(function () {
-            $("#skillForm").on("submit", function (event) {
-                event.preventDefault();
-
-                const url = $(this).attr("action");
-                const formData = $(this).serialize();
-
-                $.post(url, formData, function () {
-                    fetchAddedLearningData();
-                });
-            });
-
-            function fetchAddedLearningData() {
-                $.ajax({
-                    type: "GET",
-                    url: "/api/skills/added",
-                    success: function (response) {
-                        const categoryName = response.categoryName;
-                        const learningDataName = response.learningDataName;
-
-                        $("#modalMessage").text(`カテゴリ: ${categoryName}, 項目: ${learningDataName}`);
-                        $("#successModal").show();
-                    },
-                    error: function () {
-                        alert("データの取得に失敗しました。");
-                    }
-                });
-            }
-
-            $("#closeModal").on("click", function () {
-                const userId = $("#userId").val();
-                const redirectUrl = `/users/editSkill/${userId}`;
-                window.location.href = redirectUrl;
-            });
-        });
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -120,34 +8,71 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
 
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            width: 300px;
-            border-radius: 8px;
-            text-align: center;
-        }
+.modal-content {
+    background-color: #fff;
+    width: 640px; 
+    height: 240px; 
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
 
-        .close-btn {
-            margin-top: 10px;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-        }
+.message-container {
+    position: absolute;
+    top: 60px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 305px;
+    height: 21px;
+    font-size: 18px; 
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.modal-button {
+    position: absolute;
+    bottom: 60px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 192px;
+    height: 48px;
+    background: #1B5678;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none; 
+    box-shadow: none; 
+    transition: background-color 0.3s;
+}
+
+.modal-button:hover {
+    background-color: #154c67;
+}
     </style>
 </head>
 <body>
@@ -158,7 +83,6 @@
 
     <div class="center-container" th:text="${category} + 'に項目を追加'"></div>
 
-    <!-- スキル登録フォーム -->
     <form id="skillForm" th:action="@{'/users/addSkill/' + ${category} + '/' + ${id}}" method="post">
         <input type="hidden" id="userId" name="userId" th:value="${id}">
         <input type="hidden" id="categoryName" name="categoryName" th:value="${category}">
@@ -179,19 +103,17 @@
                 </div>
             </div>
 
-            <!-- ボタンコンテナ -->
             <div class="button-container" id="registerButton">
                 追加する
             </div>
         </div>
     </form>
 
-    <!-- 登録完了モーダル -->
     <div id="successModal" class="modal">
         <div class="modal-content">
-            <h2>登録完了</h2>
+            <div id="modalMessage" class="message-container"></div>
             <p id="modalMessage"></p>
-            <button id="closeModal" class="close-btn">閉じる</button>
+            <button id="closeModal" class="modal-button">編集ページに戻る</button>
         </div>
     </div>
 
@@ -201,19 +123,15 @@
 
     <script>
         $(document).ready(function () {
-            // ボタンコンテナのクリックイベント
             $("#registerButton").on("click", function () {
-                // フォーム送信処理
                 const url = $("#skillForm").attr("action");
                 const formData = $("#skillForm").serialize();
 
-                // フォームデータを送信
                 $.post(url, formData, function () {
                     fetchAddedLearningData();
                 });
             });
 
-            // 最新の登録データを取得してモーダル表示
             function fetchAddedLearningData() {
                 $.ajax({
                     type: "GET",
@@ -222,7 +140,7 @@
                         const categoryName = response.categoryName;
                         const learningDataName = response.learningDataName;
 
-                        $("#modalMessage").text(`カテゴリ: ${categoryName}, 項目: ${learningDataName}`);
+                        $("#modalMessage").text(`${learningDataName}の学習時間を保存しました！`);
                         $("#successModal").show();
                     },
                     error: function () {
@@ -231,7 +149,6 @@
                 });
             }
 
-            // モーダルの閉じるボタン処理
             $("#closeModal").on("click", function () {
                 const userId = $("#userId").val();
                 const redirectUrl = `/users/editSkill/${userId}`;
@@ -241,33 +158,3 @@
     </script>
 </body>
 </html>
-
-
-<!-- <div class="content">
-    <h1 th:text="'スキル登録: ' + ${category}"></h1>
-
-    <form id="skillForm" th:action="@{'/users/addSkill/' + ${category} + '/' + ${id}}" method="post">
-        <input type="hidden" id="userId" name="userId" th:value="${id}">
-        <input type="hidden" id="categoryName" name="categoryName" th:value="${category}">
-
-        <div>
-            <label for="learningDataName">学習項目名:</label>
-            <input type="text" id="learningDataName" name="learningDataName" required>
-        </div>
-        <div>
-            <label for="learningTime">学習時間 (時間):</label>
-            <input type="number" id="learningTime" name="learningTime" required min="1">
-        </div>
-        <div>
-            <button type="submit" id="registerButton">登録</button>
-        </div>
-    </form>
-
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <h2>登録完了</h2>
-            <p id="modalMessage"></p>
-            <button id="closeModal" class="close-btn">閉じる</button>
-        </div>
-    </div>
-</div> -->

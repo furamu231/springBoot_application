@@ -31,16 +31,6 @@ public interface LearningMapper {
         "AND user_id = #{userId} ORDER BY created_at DESC")
     List<LearningData> findLearningDataByCategoryAndUser(@Param("categoryName") String categoryName, @Param("userId") Integer userId);
 
-    // @Select("SELECT * FROM learning_data WHERE category_id = " +
-    //     "(SELECT id FROM categories WHERE category_name = #{categoryName}) " +
-    //     "AND user_id = #{userId} " +
-    //     "AND registered_month = TO_DATE(#{month}, 'YYYY-MM') " +
-    //     "ORDER BY created_at DESC")
-    // List<LearningData> findLearningDataByMonthAndUser(@Param("categoryName") String categoryName,
-    //                                                   @Param("userId") Integer userId,
-    //                                                   @Param("month") String month);
-    // }
-
     @Select("SELECT * FROM learning_data WHERE category_id = " +
         "(SELECT id FROM categories WHERE category_name = #{categoryName}) " +
         "AND user_id = #{userId} " +
@@ -50,7 +40,6 @@ public interface LearningMapper {
                                                   @Param("userId") Integer userId,
                                                   @Param("month") String month);
     
-
     @Select("SELECT ld.learning_data_name, c.category_name " +
         "FROM learning_data ld " +
         "JOIN categories c ON ld.category_id = c.id " +

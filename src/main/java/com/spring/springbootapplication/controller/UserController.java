@@ -130,179 +130,117 @@ public class UserController {
 
 
 
-    // ここから検索ソート
-
-    // @GetMapping("/editSkill/{id}")
-    //     public String showEditSkillForm(@PathVariable Integer id, Model model) {
-    //         User user = userService.findUserById(id);
-    //         model.addAttribute("user", user);
-
-    //       // ユーザーのバックエンドカテゴリの学習データを取得
-    //         List<LearningData> backendSkills = learningService.findLearningDataByCategoryAndUser("Backend", id);
-    //         model.addAttribute("backendSkills", backendSkills);
-
-    //         return "editSkill";
-    //     }
+    // ここから検索ソート(ユーザーコントローラから分割予定)
 
     @GetMapping("/editSkill/{id}")
     public String showEditSkillForm(@PathVariable Integer id,
-                                @RequestParam(required = false) String month,
-                                Model model) {
-        // ユーザー情報を取得
+                                    @RequestParam(required = false) String month,
+                                    Model model) {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
 
-        // 月が指定されていない場合、当月をデフォルトに設定
         if (month == null) {
-            month = LocalDate.now().toString().substring(0, 7); // "YYYY-MM" 形式
+            month = LocalDate.now().toString().substring(0, 7); 
         } 
-
-        // 指定された月のバックエンドカテゴリの学習データを取得
+  
         List<LearningData> backendSkills = learningService.findLearningDataByMonthAndUser("Backend", id, month);
+        List<LearningData> frontendSkills = learningService.findLearningDataByMonthAndUser("Frontend", id, month);
+        List<LearningData> infraSkills = learningService.findLearningDataByMonthAndUser("Infra", id, month);
+
         model.addAttribute("backendSkills", backendSkills);
+        model.addAttribute("frontendSkills", frontendSkills);
+        model.addAttribute("infraSkills", infraSkills);
         model.addAttribute("selectedMonth", month);
 
         return "editSkill";
     }
 
     // ここまで
-
     
-
-    // @GetMapping("/addSkill/{category}/{id}")
-    //     public String showAddSkillForm(@PathVariable String category,
-    //                                @PathVariable Integer id,
-    //                                Model model) {
-    //     if (!category.equals("Backend") && !category.equals("Frontend") && !category.equals("Infra")) {
-    //         return "error/404";
-    //     }
-
-    //     model.addAttribute("category", category);
-    //     model.addAttribute("id", id);
-
-    //     LearningDataDTO dto = new LearningDataDTO();
-    //     model.addAttribute("dto", dto);
-
-    //     return "addSkill";
-    // }
-
-    // @GetMapping("/addSkill/{category}/{id}")
-    //     public String showAddSkillForm(@PathVariable String category,
-    //                                @PathVariable Integer id,
-    //                                Model model) {
-    //     if (!category.equals("Backend") && !category.equals("Frontend") && !category.equals("Infra")) {
-    //         return "error/404";
-    //     }
-
-    //     model.addAttribute("category", category);
-    //     model.addAttribute("id", id);
-
-    //     LearningDataDTO dto = new LearningDataDTO();
-    //     model.addAttribute("dto", dto);
-
-    //     return "addSkill";
-    // }
-
-    // @PostMapping("/addSkill/{category}/{id}")
-    // public String addSkill(
-    //     @ModelAttribute LearningDataDTO dto,
-    //     @PathVariable String category,
-    //     @PathVariable Integer id,
-    //     RedirectAttributes redirectAttributes) {
-    //     try {
-    //         Integer categoryId = learningService.findCategoryIdByName(category);
-    //         if (categoryId == null) {
-    //             redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
-    //             return "redirect:/users/addSkill/" + category + "/" + id;
-    //         }
-
-    //         dto.setCategoryId(categoryId);
-    //         dto.setUserId(id);
-
-    //         learningService.saveLearningData(dto);
-
-    //         redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
-    //         return "redirect:/users/editSkill/" + id;
-
-    //     } catch (Exception e) {
-    //         redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
-    //         return "redirect:/users/addSkill/" + category + "/" + id;
-    //     }
-    // }
-
     @GetMapping("/addSkill/{category}/{id}")
-public String showAddSkillForm(@PathVariable String category,
-                               @PathVariable Integer id,
-                               Model model) {
-    // カテゴリ名の変換処理 (英語から日本語)
-    String japaneseCategory;
-    switch (category) {
-        case "Backend":
-            japaneseCategory = "バックエンド";
-            break;
-        case "Frontend":
-            japaneseCategory = "フロントエンド";
-            break;
-        case "Infra":
-            japaneseCategory = "インフラ";
-            break;
-        default:
-            return "error/404";
-    }
+        public String showAddSkillForm(@PathVariable String category,
+                                       @PathVariable Integer id,
+                                       Model model) {
 
-    model.addAttribute("category", japaneseCategory);
-    model.addAttribute("id", id);
-
-    LearningDataDTO dto = new LearningDataDTO();
-    model.addAttribute("dto", dto);
-
-    return "addSkill";
-}
-
-@PostMapping("/addSkill/{category}/{id}")
-public String addSkill(
-        @ModelAttribute LearningDataDTO dto,
-        @PathVariable String category,
-        @PathVariable Integer id,
-        RedirectAttributes redirectAttributes) {
-    try {
         // カテゴリ名の逆変換処理 (日本語から英語)
-        String englishCategory;
+        // テーブル名変更する or utilとして変換クラスを別で定義したほうがいいかな...
+
+        String japaneseCategory;
+
+        // 個人開発15までにwarning解消すること
+        
         switch (category) {
-            case "バックエンド":
-                englishCategory = "Backend";
+            case "Backend":
+                japaneseCategory = "バックエンド";
                 break;
-            case "フロントエンド":
-                englishCategory = "Frontend";
+            case "Frontend":
+                japaneseCategory = "フロントエンド";
                 break;
-            case "インフラ":
-                englishCategory = "Infra";
+            case "Infra":
+                japaneseCategory = "インフラ";
                 break;
             default:
-                redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
-                return "redirect:/users/addSkill/" + category + "/" + id;
+                return "error/404";
         }
 
-        // カテゴリIDの取得
-        Integer categoryId = learningService.findCategoryIdByName(englishCategory);
-        if (categoryId == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "カテゴリが見つかりません。");
-            return "redirect:/users/addSkill/" + englishCategory + "/" + id;
+        model.addAttribute("category", japaneseCategory);
+        model.addAttribute("id", id);
+
+        LearningDataDTO dto = new LearningDataDTO();
+        model.addAttribute("dto", dto);
+
+        return "addSkill";
+    }
+
+    @PostMapping("/addSkill/{category}/{id}")
+    public String addSkill(
+            @ModelAttribute LearningDataDTO dto,
+            @PathVariable String category,
+            @PathVariable Integer id,
+            RedirectAttributes redirectAttributes) {
+        try {
+
+        // カテゴリ名の逆変換処理 (日本語から英語)
+        // テーブル名変更する or utilとして変換クラスを別で定義したほうがいいかな...
+
+            String englishCategory;
+            switch (category) {
+                case "バックエンド":
+                    englishCategory = "Backend";
+                    break;
+                case "フロントエンド":
+                    englishCategory = "Frontend";
+                    break;
+                case "インフラ":
+                    englishCategory = "Infra";
+                    break;
+                default:
+                    redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
+                    return "redirect:/users/addSkill/" + category + "/" + id;
+            }
+
+            // カテゴリIDの取得
+            Integer categoryId = learningService.findCategoryIdByName(englishCategory);
+            if (categoryId == null) {
+                redirectAttributes.addFlashAttribute("errorMessage", "カテゴリが見つかりません。");
+                return "redirect:/users/addSkill/" + englishCategory + "/" + id;
+            }
+
+            // DTOにデータを設定
+            dto.setCategoryId(categoryId);
+            dto.setUserId(id);
+
+            // データを保存
+            learningService.saveLearningData(dto);
+
+            redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
+            return "redirect:/users/editSkill/" + id;
+
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
+            return "redirect:/users/addSkill/" + category + "/" + id;
         }
-
-        // DTOにデータを設定
-        dto.setCategoryId(categoryId);
-        dto.setUserId(id);
-
-        // データを保存
-        learningService.saveLearningData(dto);
-
-        redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
-        return "redirect:/users/editSkill/" + id;
-
-    } catch (Exception e) {
-        redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
-        return "redirect:/users/addSkill/" + category + "/" + id;
     }
 }
-}
+
+// 学習データ系は、別のコントローラにまとめた方がいいかもしれない
