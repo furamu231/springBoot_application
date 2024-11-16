@@ -15,8 +15,6 @@ public class LearningData {
     private Timestamp updatedAt;
     private Timestamp deletedAt;
 
-    // Getter and Setter methods
-
     public Integer getId() {
         return id;
     }

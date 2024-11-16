@@ -3,11 +3,10 @@ package com.spring.springbootapplication.dto;
 public class LearningDataDTO {
     private String learningDataName;
     private Integer learningTime;
-    private Integer categoryId; // 外部キー
-    private Integer userId;     // 外部キー
+    private Integer categoryId; 
+    private Integer userId;    
     private String registeredMonth;
 
-    // ゲッターとセッター
     public String getLearningDataName() {
         return learningDataName;
     }

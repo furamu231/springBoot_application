@@ -45,4 +45,12 @@ public interface LearningMapper {
         "JOIN categories c ON ld.category_id = c.id " +
         "ORDER BY ld.created_at DESC " +
         "LIMIT 1")
-    LearningDataResponse findLatestLearningDataWithCategory();}
+    LearningDataResponse findLatestLearningDataWithCategory();
+
+    
+    @Select("SELECT COUNT(*) FROM learning_data WHERE user_id = #{userId} AND learning_data_name = #{learningDataName}")
+    int checkDuplicateLearningDataName(@Param("userId") Integer userId, @Param("learningDataName") String learningDataName);
+
+   
+
+}

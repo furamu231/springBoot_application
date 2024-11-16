@@ -192,55 +192,52 @@ public class UserController {
         return "addSkill";
     }
 
-    @PostMapping("/addSkill/{category}/{id}")
-    public String addSkill(
-            @ModelAttribute LearningDataDTO dto,
-            @PathVariable String category,
-            @PathVariable Integer id,
-            RedirectAttributes redirectAttributes) {
-        try {
+    // @PostMapping("/addSkill/{category}/{id}")
+    // public String addSkill(
+    //         @ModelAttribute LearningDataDTO dto,
+    //         @PathVariable String category,
+    //         @PathVariable Integer id,
+    //         RedirectAttributes redirectAttributes) {
+    //     try {
 
-        // カテゴリ名の逆変換処理 (日本語から英語)
-        // テーブル名変更する or utilとして変換クラスを別で定義したほうがいいかな...
+    //         String englishCategory;
+    //         switch (category) {
+    //             case "バックエンド":
+    //                 englishCategory = "Backend";
+    //                 break;
+    //             case "フロントエンド":
+    //                 englishCategory = "Frontend";
+    //                 break;
+    //             case "インフラ":
+    //                 englishCategory = "Infra";
+    //                 break;
+    //             default:
+    //                 redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
+    //                 return "redirect:/users/addSkill/" + category + "/" + id;
+    //         }
 
-            String englishCategory;
-            switch (category) {
-                case "バックエンド":
-                    englishCategory = "Backend";
-                    break;
-                case "フロントエンド":
-                    englishCategory = "Frontend";
-                    break;
-                case "インフラ":
-                    englishCategory = "Infra";
-                    break;
-                default:
-                    redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
-                    return "redirect:/users/addSkill/" + category + "/" + id;
-            }
+    //         // カテゴリIDの取得
+    //         Integer categoryId = learningService.findCategoryIdByName(englishCategory);
+    //         if (categoryId == null) {
+    //             redirectAttributes.addFlashAttribute("errorMessage", "カテゴリが見つかりません。");
+    //             return "redirect:/users/addSkill/" + englishCategory + "/" + id;
+    //         }
 
-            // カテゴリIDの取得
-            Integer categoryId = learningService.findCategoryIdByName(englishCategory);
-            if (categoryId == null) {
-                redirectAttributes.addFlashAttribute("errorMessage", "カテゴリが見つかりません。");
-                return "redirect:/users/addSkill/" + englishCategory + "/" + id;
-            }
+    //         // DTOにデータを設定
+    //         dto.setCategoryId(categoryId);
+    //         dto.setUserId(id);
 
-            // DTOにデータを設定
-            dto.setCategoryId(categoryId);
-            dto.setUserId(id);
+    //         // データを保存
+    //         learningService.saveLearningData(dto);
 
-            // データを保存
-            learningService.saveLearningData(dto);
+    //         redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
+    //         return "redirect:/users/editSkill/" + id;
 
-            redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
-            return "redirect:/users/editSkill/" + id;
-
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
-            return "redirect:/users/addSkill/" + category + "/" + id;
-        }
-    }
+    //     } catch (Exception e) {
+    //         redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
+    //         return "redirect:/users/addSkill/" + category + "/" + id;
+    //     }
+    // }
 }
 
 // 学習データ系は、別のコントローラにまとめた方がいいかもしれない
