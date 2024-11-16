@@ -182,7 +182,8 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify(formData),
             success: function (response) {
-                $("#modalMessage").text("スキルが正常に追加されました！");
+                const message = `${categoryName}に${learningDataName}を${learningTime}分で追加しました！`;
+                $("#modalMessage").text(message);
                 $("#successModal").show();
             },
             error: function (xhr) {
