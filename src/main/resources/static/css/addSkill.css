@@ -70,6 +70,25 @@ body {
     color: #333; 
 }
 
+.error-message-container {
+    position: absolute;
+    top: 260px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 488px;
+    height: 40px;
+    border-radius: 8px;
+    /* background-color: #ffdddd;  */
+    /* border: 1px solid #ff8888;  */
+    color: #d8000c; /* 赤文字 */
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden; 
+    z-index: 100; 
+}
+
 .form-container {
     top: 328px;
     left: 50%;

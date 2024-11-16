@@ -44,4 +44,12 @@ public class LearningService {
     public LearningDataResponse findAddedLearningData() {
         return learningMapper.findLatestLearningDataWithCategory();
     }
+
+    // 重複チェック(デバック)
+
+    public boolean isLearningDataNameDuplicated(Integer userId, String learningDataName) {
+        int count = learningMapper.checkDuplicateLearningDataName(userId, learningDataName);
+        System.out.println("重複チェック結果: " + count);
+        return count > 0;
+    }
 }
