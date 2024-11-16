@@ -60,7 +60,7 @@ body {
     top: 200px;
     left: 50%;
     transform: translateX(-50%);
-    width: 466px;
+    width: 488px;
     height: 48px;
     border-radius: 8px;
     display: flex;
@@ -96,15 +96,30 @@ body {
 .top-left-container {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 8px; /* 左側に余白を追加 */
     width: 37px;
     height: 12px;
-    background-color: transparent; /* 識別用の背景色 (淡いオレンジ) */
-    color: #808080;; /* テキストの色: 灰色 */
+    background-color: transparent; /* 背景を透明に */
+    color: #808080; /* テキストの色: 灰色 */
     font-size: 12px; /* テキストサイズ: 12px */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* 左揃えに変更 */
     align-items: center;
+    z-index: 1; /* ラベルを前面に表示 */
+}
+
+.learning-data-input {
+    position: relative;
+    margin-top: 12px; /* 項目名ラベルとの間隔を調整 */
+    padding-left: 4px; /* 左側に4pxの余白を追加 */
+    width: 480px; /* 親コンテナと同じ幅 */
+    height: 36px;
+    border: none;
+    background-color: transparent; /* フォームの背景を透明に */
+    font-size: 14px;
+    color: #333;
+    outline: none; /* フォーカス時のアウトラインを消す */
+    z-index: 0; /* 入力フォームを背面に表示 */
 }
 
 /* 新しい子コンテナ (下に配置される) */
@@ -123,26 +138,41 @@ body {
     left: 0;
     width: 480px;
     height: 48px;
-    background-color: transparent; /* 識別用の背景色 (淡い緑色) */
+    background-color: transparent; /* 背景を透明に設定 */
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    padding: 4px; /* 少し余白を追加 */
-    border-bottom: 1px solid #ccc; 
+    padding: 4px; /* 内側に少し余白を追加 */
+    border-bottom: 1px solid #ccc;
 }
 
-/* 左上角に配置する新しい子コンテナ */
+/* 左上角に配置する "学習時間" ラベル */
 .top-left-learning-time {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 49px;
     height: 12px;
-    background-color: transparent; /* 識別用の背景色 (淡いオレンジ系) */
+    background-color: transparent;
     color: #808080; /* テキストの色: 灰色 */
-    font-size: 12px; /* テキストサイズ: 12px */
+    font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* 学習時間の入力フォーム */
+.learning-time-input {
+    position: relative;
+    margin-top: 8px; /* ラベルとの間隔を調整 */
+    margin-bottom: 12px; /* アンダーラインとの間隔を広げる */
+    width: 480px;
+    height: 36px;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: #333;
+    outline: none;
 }
 
 /* 新しい下底コンテナ */
@@ -191,6 +221,17 @@ body {
     background-color: #154c67; /* ホバー時の背景色 (少し暗めの青色) */
 }
 
+/* .footer {
+    width: 100%;
+    height: 40px;
+    background-color: #1B5678;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+} */
+
 .footer {
     width: 100%;
     height: 40px;
@@ -200,4 +241,5 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 18px;
+    margin-top: auto; /* フッターを最下部に配置 */
 }

@@ -169,50 +169,140 @@ public class UserController {
 
     
 
+    // @GetMapping("/addSkill/{category}/{id}")
+    //     public String showAddSkillForm(@PathVariable String category,
+    //                                @PathVariable Integer id,
+    //                                Model model) {
+    //     if (!category.equals("Backend") && !category.equals("Frontend") && !category.equals("Infra")) {
+    //         return "error/404";
+    //     }
+
+    //     model.addAttribute("category", category);
+    //     model.addAttribute("id", id);
+
+    //     LearningDataDTO dto = new LearningDataDTO();
+    //     model.addAttribute("dto", dto);
+
+    //     return "addSkill";
+    // }
+
+    // @GetMapping("/addSkill/{category}/{id}")
+    //     public String showAddSkillForm(@PathVariable String category,
+    //                                @PathVariable Integer id,
+    //                                Model model) {
+    //     if (!category.equals("Backend") && !category.equals("Frontend") && !category.equals("Infra")) {
+    //         return "error/404";
+    //     }
+
+    //     model.addAttribute("category", category);
+    //     model.addAttribute("id", id);
+
+    //     LearningDataDTO dto = new LearningDataDTO();
+    //     model.addAttribute("dto", dto);
+
+    //     return "addSkill";
+    // }
+
+    // @PostMapping("/addSkill/{category}/{id}")
+    // public String addSkill(
+    //     @ModelAttribute LearningDataDTO dto,
+    //     @PathVariable String category,
+    //     @PathVariable Integer id,
+    //     RedirectAttributes redirectAttributes) {
+    //     try {
+    //         Integer categoryId = learningService.findCategoryIdByName(category);
+    //         if (categoryId == null) {
+    //             redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
+    //             return "redirect:/users/addSkill/" + category + "/" + id;
+    //         }
+
+    //         dto.setCategoryId(categoryId);
+    //         dto.setUserId(id);
+
+    //         learningService.saveLearningData(dto);
+
+    //         redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
+    //         return "redirect:/users/editSkill/" + id;
+
+    //     } catch (Exception e) {
+    //         redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
+    //         return "redirect:/users/addSkill/" + category + "/" + id;
+    //     }
+    // }
+
     @GetMapping("/addSkill/{category}/{id}")
-        public String showAddSkillForm(@PathVariable String category,
-                                   @PathVariable Integer id,
-                                   Model model) {
-        if (!category.equals("Backend") && !category.equals("Frontend") && !category.equals("Infra")) {
+public String showAddSkillForm(@PathVariable String category,
+                               @PathVariable Integer id,
+                               Model model) {
+    // カテゴリ名の変換処理 (英語から日本語)
+    String japaneseCategory;
+    switch (category) {
+        case "Backend":
+            japaneseCategory = "バックエンド";
+            break;
+        case "Frontend":
+            japaneseCategory = "フロントエンド";
+            break;
+        case "Infra":
+            japaneseCategory = "インフラ";
+            break;
+        default:
             return "error/404";
-        }
-
-        model.addAttribute("category", category);
-        model.addAttribute("id", id);
-
-        LearningDataDTO dto = new LearningDataDTO();
-        model.addAttribute("dto", dto);
-
-        return "addSkill";
     }
 
-    @PostMapping("/addSkill/{category}/{id}")
-    public String addSkill(
+    model.addAttribute("category", japaneseCategory);
+    model.addAttribute("id", id);
+
+    LearningDataDTO dto = new LearningDataDTO();
+    model.addAttribute("dto", dto);
+
+    return "addSkill";
+}
+
+@PostMapping("/addSkill/{category}/{id}")
+public String addSkill(
         @ModelAttribute LearningDataDTO dto,
         @PathVariable String category,
         @PathVariable Integer id,
         RedirectAttributes redirectAttributes) {
-        try {
-            // カテゴリIDの取得
-            Integer categoryId = learningService.findCategoryIdByName(category);
-            if (categoryId == null) {
+    try {
+        // カテゴリ名の逆変換処理 (日本語から英語)
+        String englishCategory;
+        switch (category) {
+            case "バックエンド":
+                englishCategory = "Backend";
+                break;
+            case "フロントエンド":
+                englishCategory = "Frontend";
+                break;
+            case "インフラ":
+                englishCategory = "Infra";
+                break;
+            default:
                 redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
                 return "redirect:/users/addSkill/" + category + "/" + id;
-            }
-
-            // DTOからエンティティを作成
-            dto.setCategoryId(categoryId);
-            dto.setUserId(id);
-
-            // データを保存
-            learningService.saveLearningData(dto);
-
-            redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
-            return "redirect:/users/editSkill/" + id;
-
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
-            return "redirect:/users/addSkill/" + category + "/" + id;
         }
+
+        // カテゴリIDの取得
+        Integer categoryId = learningService.findCategoryIdByName(englishCategory);
+        if (categoryId == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "カテゴリが見つかりません。");
+            return "redirect:/users/addSkill/" + englishCategory + "/" + id;
+        }
+
+        // DTOにデータを設定
+        dto.setCategoryId(categoryId);
+        dto.setUserId(id);
+
+        // データを保存
+        learningService.saveLearningData(dto);
+
+        redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
+        return "redirect:/users/editSkill/" + id;
+
+    } catch (Exception e) {
+        redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
+        return "redirect:/users/addSkill/" + category + "/" + id;
     }
+}
 }
