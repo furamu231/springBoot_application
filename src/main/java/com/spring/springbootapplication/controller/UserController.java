@@ -174,7 +174,7 @@ public class UserController {
             japaneseCategory = "バックエンド";
                 break;
             case "Frontend":
-                japaneseCategory = "フロントエンド";
+            japaneseCategory = "フロントエンド";
                 break;
             case "Infra":
                 japaneseCategory = "インフラ";

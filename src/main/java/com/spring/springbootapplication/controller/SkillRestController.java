@@ -30,4 +30,9 @@ public class SkillRestController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/confirm")
+    public ResponseEntity<String> getLatestLearningData() {
+        return ResponseEntity.ok("API is working");
+    }
 }
