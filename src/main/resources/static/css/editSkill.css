@@ -231,12 +231,13 @@ body {
     text-align: center;
     line-height: 48px;
     font-size: 16px;
+    text-decoration: none;
+    appearance: none; 
 }
 
-/* ホバー時のスタイル */
 .right-button:hover {
-    background-color: #2c78a0; /* 少し明るめのブルーに変更 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* シャドウ効果を追加 */
+    background-color: #2c78a0; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
 .content-container {
@@ -305,10 +306,6 @@ body {
     flex-direction: row;
     border-bottom: 1px solid #ccc; 
 }
-
-/* .middle-box:last-child {
-    border-bottom: none; 
-} */
 
 .middle-box-item {
     width: 220px;
