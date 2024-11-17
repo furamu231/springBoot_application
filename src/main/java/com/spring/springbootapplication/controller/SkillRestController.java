@@ -78,32 +78,32 @@ public class SkillRestController {
     }
 
     @PutMapping("/update")
-public ResponseEntity<?> updateLearningTime(@RequestBody LearningDataDTO dto) {
-    System.out.println("Received ID: " + dto.getId());
-    System.out.println("Received LearningTime: " + dto.getLearningTime());
+    public ResponseEntity<?> updateLearningTime(@RequestBody LearningDataDTO dto) {
+        // System.out.println("Received ID: " + dto.getId());
+        // System.out.println("Received LearningTime: " + dto.getLearningTime());
 
-    if (dto.getId() == null || dto.getLearningTime() == null || dto.getLearningTime() < 1) {
-        return ResponseEntity.badRequest().body("無効な学習時間です。");
-    }
-
-    learningService.updateLearningTime(dto.getId(), dto.getLearningTime());
-    return ResponseEntity.ok("学習時間が正常に更新されました。");
-}
-    @DeleteMapping("/delete/{id}")
-public ResponseEntity<?> deleteLearningData(@PathVariable Integer id) {
-    try {
-        // データが存在するか確認
-        boolean exists = learningService.isLearningDataExists(id);
-        if (!exists) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("指定された学習データが見つかりません。");
+        if (dto.getId() == null || dto.getLearningTime() == null || dto.getLearningTime() < 1) {
+            return ResponseEntity.badRequest().body("無効な学習時間です。");
         }
 
-        // データを削除
-        learningService.deleteLearningData(id);
-        return ResponseEntity.ok("学習データが正常に削除されました。");
-
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("削除処理中にエラーが発生しました。");
+        learningService.updateLearningTime(dto.getId(), dto.getLearningTime());
+        return ResponseEntity.ok("学習時間が正常に更新されました。");
     }
-}
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteLearningData(@PathVariable Integer id) {
+        try {
+            // データが存在するか確認
+            boolean exists = learningService.isLearningDataExists(id);
+            if (!exists) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("指定された学習データが見つかりません。");
+            }
+
+            // データを削除
+            learningService.deleteLearningData(id);
+            return ResponseEntity.ok("学習データが正常に削除されました。");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("削除処理中にエラーが発生しました。");
+        }
+    }
 }
