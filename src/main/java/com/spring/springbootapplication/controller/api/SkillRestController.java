@@ -3,9 +3,7 @@ package com.spring.springbootapplication.controller.api;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +38,7 @@ public class SkillRestController {
     }
 
     @PostMapping("/add")
-        public ResponseEntity<?> addSkill(@RequestBody LearningDataDTO dto) {
+    public ResponseEntity<?> addSkill(@RequestBody LearningDataDTO dto) {
         try {
             // カテゴリ英語で取れてくるから忘れないで
             // カテゴリIDのバリデーション
@@ -89,21 +87,22 @@ public class SkillRestController {
         learningService.updateLearningTime(dto.getId(), dto.getLearningTime());
         return ResponseEntity.ok("学習時間が正常に更新されました。");
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteLearningData(@PathVariable Integer id) {
-        try {
-            // データが存在するか確認
-            boolean exists = learningService.isLearningDataExists(id);
-            if (!exists) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("指定された学習データが見つかりません。");
-            }
 
-            // データを削除
-            learningService.deleteLearningData(id);
-            return ResponseEntity.ok("学習データが正常に削除されました。");
+    // @DeleteMapping("/delete/{id}")
+    // public ResponseEntity<?> deleteLearningData(@PathVariable Integer id) {
+    //     try {
+    //         // データが存在するか確認
+    //         boolean exists = learningService.isLearningDataExists(id);
+    //         if (!exists) {
+    //             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("指定された学習データが見つかりません。");
+    //         }
 
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("削除処理中にエラーが発生しました。");
-        }
+    //         // データを削除
+    //         learningService.deleteLearningData(id);
+    //         return ResponseEntity.ok("学習データが正常に削除されました。");
+
+    //         } catch (Exception e) {
+    //             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("削除処理中にエラーが発生しました。");
+    //         }
+    //     }
     }
-}

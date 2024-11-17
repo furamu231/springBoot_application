@@ -10,7 +10,7 @@ public class LearningData {
     private Integer learningTime;
     private Integer categoryId;
     private Integer userId;
-    private LocalDate registeredMonth; // 修正: LocalDate 型に変更
+    private LocalDate registeredMonth; 
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private Timestamp deletedAt;

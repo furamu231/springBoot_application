@@ -1,7 +1,7 @@
 package com.spring.springbootapplication.dto;
 
 public class LearningDataDTO {
-    private Integer id; // 追加
+    private Integer id; 
     private String learningDataName;
     private Integer learningTime;
     private Integer categoryId; 
