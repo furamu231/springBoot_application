@@ -1,4 +1,4 @@
-package com.spring.springbootapplication.controller;
+package com.spring.springbootapplication.controller.util;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
