@@ -56,4 +56,16 @@ public class LearningService {
         System.out.println("重複チェック結果: " + count);
         return count > 0;
     }
+
+    public void updateLearningTime(Integer id, Integer learningTime) {
+        learningMapper.updateLearningTime(id, learningTime);
+    }
+
+    public boolean isLearningDataExists(Integer id) {
+        return learningMapper.findLearningDataById(id) != null;
+    }
+    
+    public void deleteLearningData(Integer id) {
+        learningMapper.deleteLearningDataById(id);
+    }
 }

@@ -2,11 +2,13 @@ package com.spring.springbootapplication.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.spring.springbootapplication.dto.LearningDataResponse;
 import com.spring.springbootapplication.entity.LearningData;
@@ -56,6 +58,13 @@ void insertLearningData(LearningData learningData);
     @Select("SELECT COUNT(*) FROM learning_data WHERE user_id = #{userId} AND learning_data_name = #{learningDataName}")
     int checkDuplicateLearningDataName(@Param("userId") Integer userId, @Param("learningDataName") String learningDataName);
 
-   
+   @Update("UPDATE learning_data SET learning_time = #{learningTime}, updated_at = CURRENT_TIMESTAMP WHERE id = #{id}")
+void updateLearningTime(@Param("id") Integer id, @Param("learningTime") Integer learningTime);
+
+    @Select("SELECT * FROM learning_data WHERE id = #{id}")
+LearningData findLearningDataById(Integer id);
+
+@Delete("DELETE FROM learning_data WHERE id = #{id}")
+void deleteLearningDataById(Integer id);
 
 }
