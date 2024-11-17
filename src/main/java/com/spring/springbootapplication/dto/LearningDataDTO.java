@@ -1,11 +1,20 @@
 package com.spring.springbootapplication.dto;
 
 public class LearningDataDTO {
+    private Integer id; 
     private String learningDataName;
     private Integer learningTime;
     private Integer categoryId; 
     private Integer userId;    
     private String registeredMonth;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getLearningDataName() {
         return learningDataName;
