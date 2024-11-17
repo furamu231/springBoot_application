@@ -61,11 +61,11 @@ public class LearningService {
         learningMapper.updateLearningTime(id, learningTime);
     }
 
-    // public boolean isLearningDataExists(Integer id) {
-    //     return learningMapper.findLearningDataById(id) != null;
-    // }
+    public boolean isLearningDataExists(Integer id) {
+        return learningMapper.findLearningDataById(id) != null;
+    }
     
-    // public void deleteLearningData(Integer id) {
-    //     learningMapper.deleteLearningDataById(id);
-    // }
+    public void deleteLearningData(Integer id) {
+        learningMapper.deleteLearningDataById(id);
+    }
 }
