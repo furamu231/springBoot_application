@@ -41,4 +41,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.location.href = `/users/editSkill/${userId}?month=${newSelectedMonth}`;
     });
+    
 });

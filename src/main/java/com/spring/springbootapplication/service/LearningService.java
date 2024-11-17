@@ -2,6 +2,7 @@ package com.spring.springbootapplication.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class LearningService {
         learningData.setCategoryId(dto.getCategoryId());
         learningData.setUserId(dto.getUserId());
         LocalDate registeredMonth = LocalDate.parse(dto.getRegisteredMonth());
-    learningData.setRegisteredMonth(registeredMonth);
+        learningData.setRegisteredMonth(registeredMonth);
 
         learningMapper.insertLearningData(learningData);
     }
@@ -53,7 +54,7 @@ public class LearningService {
 
     public boolean isLearningDataNameDuplicated(Integer userId, String learningDataName) {
         int count = learningMapper.checkDuplicateLearningDataName(userId, learningDataName);
-        System.out.println("重複チェック結果: " + count);
+        // System.out.println("重複チェック結果: " + count);
         return count > 0;
     }
 
@@ -67,5 +68,9 @@ public class LearningService {
     
     public void deleteLearningData(Integer id) {
         learningMapper.deleteLearningDataById(id);
+    }
+
+    public List<Map<String, Object>> getTotalLearningTime(Integer userId) {
+        return learningMapper.findTotalLearningTime(userId);
     }
 }

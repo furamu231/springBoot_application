@@ -1,6 +1,7 @@
 package com.spring.springbootapplication.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -61,4 +62,18 @@ public interface LearningMapper {
 
     @Delete("DELETE FROM learning_data WHERE id = #{id}")
     void deleteLearningDataById(Integer id);
+
+
+    @Select("""
+        SELECT c.category_name AS category,
+               TO_CHAR(ld.registered_month, 'YYYY-MM') AS month,
+               SUM(ld.learning_time) AS total_time
+        FROM learning_data ld
+        JOIN categories c ON ld.category_id = c.id
+        WHERE ld.user_id = #{userId}
+          AND ld.registered_month >= CURRENT_DATE - INTERVAL '3 months'
+        GROUP BY c.category_name, TO_CHAR(ld.registered_month, 'YYYY-MM')
+        ORDER BY c.category_name, month
+    """)
+    List<Map<String, Object>> findTotalLearningTime(@Param("userId") Integer userId);
 }
