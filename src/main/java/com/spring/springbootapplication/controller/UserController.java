@@ -169,19 +169,26 @@ public class UserController {
 
         // 個人開発15までにwarning解消すること
 
-        switch (category) {
-            case "Backend":
-            japaneseCategory = "バックエンド";
-                break;
-            case "Frontend":
-            japaneseCategory = "フロントエンド";
-                break;
-            case "Infra":
-                japaneseCategory = "インフラ";
-                break;
-            default:
-                return "error/404";
-        }
+        // switch (category) {
+        //     case "Backend":
+        //     japaneseCategory = "バックエンド";
+        //         break;
+        //     case "Frontend":
+        //     japaneseCategory = "フロントエンド";
+        //         break;
+        //     case "Infra":
+        //         japaneseCategory = "インフラ";
+        //         break;
+        //     default:
+        //         return "error/404";
+        // }
+
+        japaneseCategory = switch (category) {
+            case "Backend" -> "バックエンド";
+            case "Frontend" -> "フロントエンド";
+            case "Infra" -> "インフラ";
+            default -> throw new IllegalArgumentException("無効なカテゴリ: " + category);
+        };
 
         model.addAttribute("category", japaneseCategory);
         model.addAttribute("id", id);
@@ -191,53 +198,4 @@ public class UserController {
 
         return "addSkill";
     }
-
-    // @PostMapping("/addSkill/{category}/{id}")
-    // public String addSkill(
-    //         @ModelAttribute LearningDataDTO dto,
-    //         @PathVariable String category,
-    //         @PathVariable Integer id,
-    //         RedirectAttributes redirectAttributes) {
-    //     try {
-
-    //         String englishCategory;
-    //         switch (category) {
-    //             case "バックエンド":
-    //                 englishCategory = "Backend";
-    //                 break;
-    //             case "フロントエンド":
-    //                 englishCategory = "Frontend";
-    //                 break;
-    //             case "インフラ":
-    //                 englishCategory = "Infra";
-    //                 break;
-    //             default:
-    //                 redirectAttributes.addFlashAttribute("errorMessage", "無効なカテゴリです。");
-    //                 return "redirect:/users/addSkill/" + category + "/" + id;
-    //         }
-
-    //         // カテゴリIDの取得
-    //         Integer categoryId = learningService.findCategoryIdByName(englishCategory);
-    //         if (categoryId == null) {
-    //             redirectAttributes.addFlashAttribute("errorMessage", "カテゴリが見つかりません。");
-    //             return "redirect:/users/addSkill/" + englishCategory + "/" + id;
-    //         }
-
-    //         // DTOにデータを設定
-    //         dto.setCategoryId(categoryId);
-    //         dto.setUserId(id);
-
-    //         // データを保存
-    //         learningService.saveLearningData(dto);
-
-    //         redirectAttributes.addFlashAttribute("successMessage", "スキルが正常に追加されました。");
-    //         return "redirect:/users/editSkill/" + id;
-
-    //     } catch (Exception e) {
-    //         redirectAttributes.addFlashAttribute("errorMessage", "登録処理中にエラーが発生しました。");
-    //         return "redirect:/users/addSkill/" + category + "/" + id;
-    //     }
-    // }
 }
-
-// 学習データ系は、別のコントローラにまとめた方がいいかもしれない

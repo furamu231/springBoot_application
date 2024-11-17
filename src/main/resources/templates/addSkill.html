@@ -5,75 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>スキル登録</title>
     <link rel="stylesheet" href="/css/addSkill.css">
+    <link rel="stylesheet" href="/css/modal.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-}
-
-.modal-content {
-    background-color: #fff;
-    width: 640px; 
-    height: 240px; 
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-}
-
-.message-container {
-    position: absolute;
-    top: 60px; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 305px;
-    height: 21px;
-    font-size: 18px; 
-    color: #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.modal-button {
-    position: absolute;
-    bottom: 60px; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 192px;
-    height: 48px;
-    background: #1B5678;
-    color: #fff;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none; 
-    box-shadow: none; 
-    transition: background-color 0.3s;
-}
-
-.modal-button:hover {
-    background-color: #154c67;
-}
-    </style>
 </head>
 <body>
     <div class="header">
@@ -119,12 +52,16 @@
     </div>
 
     <script>
-
-$(document).ready(function () {
+        $(document).ready(function () {
     function showError(message) {
         const $errorMessageContainer = $("#errorMessageContainer");
         $errorMessageContainer.text(message).css("visibility", "visible");
     }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedMonth = urlParams.get("month");
+
+    const registeredMonth = selectedMonth ? `${selectedMonth}-01` : null;
 
     $("#registerButton").on("click", function () {
         const userId = $("#userId").val();
@@ -153,6 +90,11 @@ $(document).ready(function () {
             return;
         }
 
+        if (!registeredMonth) {
+            showError("登録月が選択されていません。");
+            return;
+        }
+
         // カテゴリIDの決定
         switch (categoryName) {
             case "バックエンド":
@@ -174,7 +116,10 @@ $(document).ready(function () {
             categoryId: categoryId,
             learningDataName: learningDataName,
             learningTime: learningTime,
+            registeredMonth: registeredMonth 
         };
+
+        console.log("送信するデータ:", formData);
 
         $.ajax({
             type: "POST",
@@ -182,7 +127,7 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify(formData),
             success: function (response) {
-                const message = `${categoryName}に${learningDataName}を${learningTime}分で追加しました！`;
+                const message = `${categoryName} の ${learningDataName} を ${learningTime} 分で追加しました！`;
                 $("#modalMessage").text(message);
                 $("#successModal").show();
             },
@@ -199,9 +144,10 @@ $(document).ready(function () {
 
     $("#closeModal").on("click", function () {
         const userId = $("#userId").val();
-        window.location.href = `/users/editSkill/${userId}`;
+        window.location.href = `/users/editSkill/${userId}?month=${selectedMonth}`;
     });
 });
     </script>
+    <!-- <input type="hidden" id="user-id" th:value="${user.id}"> -->
 </body>
 </html>

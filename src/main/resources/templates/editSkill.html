@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>トップページ</title>
     <link rel="stylesheet" href="/css/editSkill.css">
+    <link rel="stylesheet" href="/css/modal.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <input type="hidden" id="user-id" th:value="${user.id}">
@@ -34,7 +36,8 @@
                                 <span class="category-text">バックエンド</span>
                             </div>
                         </div>
-                        <a class="right-button" th:href="@{'/users/addSkill/Backend/' + ${id}}">項目を追加する</a>
+                        <!-- <a class="right-button" th:href="@{'/users/addSkill/Backend/' + ${id}}">項目を追加する</a> -->
+                        <a class="add-skill-button right-button" th:attr="data-category='Backend', data-id=${id}" href="#">項目を追加する</a>
                     </div>
                     <div class="content-container">
                         <div class="top-box">
@@ -81,7 +84,8 @@
                                 <span class="category-text">フロントエンド</span>
                             </div>
                         </div>
-                        <a class="right-button" th:href="@{'/users/addSkill/Frontend/' + ${id}}">項目を追加する</a>
+                        <!-- <a class="right-button" th:href="@{'/users/addSkill/Frontend/' + ${id}}">項目を追加する</a> -->
+                        <a class="add-skill-button right-button" th:attr="data-category='Frontend', data-id=${id}" href="#">項目を追加する</a>
                     </div>
                     <div class="content-container">
                         <div class="top-box">
@@ -125,7 +129,8 @@
                                 <span class="category-text">インフラ</span>
                             </div>
                         </div>
-                        <a class="right-button" th:href="@{'/users/addSkill/Infra/' + ${id}}">項目を追加する</a>
+                        <!-- <a class="right-button" th:href="@{'/users/addSkill/Infra/' + ${id}}">項目を追加する</a> -->
+                        <a class="add-skill-button right-button" th:attr="data-category='Infra', data-id=${id}" href="#">項目を追加する</a>
                     </div>
                     <div class="content-container">
                         <div class="top-box">
@@ -163,10 +168,25 @@
             </div>    
         </div> 
     </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div id="modalMessage" class="message-container"></div>
+            <button id="closeModalButton" class="modal-button">編集ページに戻る</button>
+        </div>
+    </div>
+
+   <!-- 削除確認モーダル -->
+</div>
+
+
     <div class="footer">
         portfolio site
     </div>
     <script src="/js/monthPulldown.js"></script>
+    <script src="/js/move.js"></script>
+    <script src="/js/update.js"></script>
+    <script src="/js/delete.js"></script>
     <input type="hidden" id="user-id" th:value="${user.id}">
 </body>
 </html>

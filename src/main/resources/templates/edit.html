@@ -34,7 +34,6 @@
                 <div class="additional-container">
                     <div class="top-left-container">アバター画像</div>
                     
-                    <!-- input file は1つにする -->
                     <input type="file" id="profileImage" name="profileImage" th:field="*{profileImage}" accept="image/*" style="display: none;" onchange="displayFileName()">
                     <div class="button-wrapper">
                         <button type="button" class="custom-button" onclick="document.getElementById('profileImage').click();">
@@ -42,9 +41,7 @@
                         </button>
                         <div id="file-name" class="file-name-display"></div>
                     </div>
-                    <!-- ファイル名表示用の要素 -->
                 </div>
-
                 <button type="submit" class="main-button">自己紹介を確定する</button>
             </form>
         </div>

@@ -1,4 +1,4 @@
-package com.spring.springbootapplication.controller;
+package com.spring.springbootapplication.controller.api;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,11 +18,11 @@ import com.spring.springbootapplication.service.UserService;
 // 画像取得用のapi
 
 @RestController
-public class ImageController {
+public class ImageRestController {
 
     private final UserService userService;
 
-    public ImageController(UserService userService) {
+    public ImageRestController(UserService userService) {
         this.userService = userService;
     }
 

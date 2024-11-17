@@ -2,11 +2,13 @@ package com.spring.springbootapplication.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.spring.springbootapplication.dto.LearningDataResponse;
 import com.spring.springbootapplication.entity.LearningData;
@@ -18,7 +20,7 @@ public interface LearningMapper {
     Integer findCategoryIdByName(@Param("categoryName") String categoryName);
 
     @Insert("INSERT INTO learning_data (learning_data_name, learning_time, category_id, user_id, registered_month, created_at, updated_at) " +
-            "VALUES (#{learningDataName}, #{learningTime}, #{categoryId}, #{userId}, CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
+        "VALUES (#{learningDataName}, #{learningTime}, #{categoryId}, #{userId}, #{registeredMonth}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertLearningData(LearningData learningData);
 
@@ -51,6 +53,12 @@ public interface LearningMapper {
     @Select("SELECT COUNT(*) FROM learning_data WHERE user_id = #{userId} AND learning_data_name = #{learningDataName}")
     int checkDuplicateLearningDataName(@Param("userId") Integer userId, @Param("learningDataName") String learningDataName);
 
-   
+    @Update("UPDATE learning_data SET learning_time = #{learningTime}, updated_at = CURRENT_TIMESTAMP WHERE id = #{id}")
+    void updateLearningTime(@Param("id") Integer id, @Param("learningTime") Integer learningTime);
 
+    @Select("SELECT * FROM learning_data WHERE id = #{id}")
+    LearningData findLearningDataById(Integer id);
+
+    @Delete("DELETE FROM learning_data WHERE id = #{id}")
+    void deleteLearningDataById(Integer id);
 }
