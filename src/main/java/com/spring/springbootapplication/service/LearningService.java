@@ -1,5 +1,6 @@
 package com.spring.springbootapplication.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class LearningService {
         learningData.setLearningTime(dto.getLearningTime());
         learningData.setCategoryId(dto.getCategoryId());
         learningData.setUserId(dto.getUserId());
+        LocalDate registeredMonth = LocalDate.parse(dto.getRegisteredMonth());
+    learningData.setRegisteredMonth(registeredMonth);
+
         learningMapper.insertLearningData(learningData);
     }
 

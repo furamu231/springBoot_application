@@ -119,12 +119,18 @@
     </div>
 
     <script>
-
-$(document).ready(function () {
+        $(document).ready(function () {
     function showError(message) {
         const $errorMessageContainer = $("#errorMessageContainer");
         $errorMessageContainer.text(message).css("visibility", "visible");
     }
+
+    // URL から `month` クエリパラメータを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedMonth = urlParams.get("month");
+
+    // `selectedMonth` が `YYYY-MM` 形式の場合、`YYYY-MM-DD` に変換
+    const registeredMonth = selectedMonth ? `${selectedMonth}-01` : null;
 
     $("#registerButton").on("click", function () {
         const userId = $("#userId").val();
@@ -133,6 +139,7 @@ $(document).ready(function () {
         const categoryName = $("#categoryName").val();
         let categoryId;
 
+        // バリデーション
         if (!learningDataName) {
             showError("項目名は必ず入力してください。");
             return;
@@ -153,6 +160,11 @@ $(document).ready(function () {
             return;
         }
 
+        if (!registeredMonth) {
+            showError("登録月が選択されていません。");
+            return;
+        }
+
         // カテゴリIDの決定
         switch (categoryName) {
             case "バックエンド":
@@ -169,20 +181,25 @@ $(document).ready(function () {
                 return;
         }
 
+        // フォームデータの作成
         const formData = {
             userId: userId,
             categoryId: categoryId,
             learningDataName: learningDataName,
             learningTime: learningTime,
+            registeredMonth: registeredMonth // `registeredMonth` を追加
         };
 
+        console.log("送信するデータ:", formData);
+
+        // API リクエスト
         $.ajax({
             type: "POST",
             url: "/api/skills/add",
             contentType: "application/json",
             data: JSON.stringify(formData),
             success: function (response) {
-                const message = `${categoryName}に${learningDataName}を${learningTime}分で追加しました！`;
+                const message = `${categoryName} の ${learningDataName} を ${learningTime} 分で追加しました！`;
                 $("#modalMessage").text(message);
                 $("#successModal").show();
             },
@@ -197,9 +214,11 @@ $(document).ready(function () {
         });
     });
 
+    // モーダルの閉じるボタンのクリックイベント
     $("#closeModal").on("click", function () {
         const userId = $("#userId").val();
-        window.location.href = `/users/editSkill/${userId}`;
+        // window.location.href = `/users/editSkill/${userId}`;
+        window.location.href = `/users/editSkill/${userId}?month=${selectedMonth}`;
     });
 });
     </script>

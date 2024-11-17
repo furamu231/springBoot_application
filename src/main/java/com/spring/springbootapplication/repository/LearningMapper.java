@@ -17,10 +17,15 @@ public interface LearningMapper {
     @Select("SELECT id FROM categories WHERE category_name = #{categoryName}")
     Integer findCategoryIdByName(@Param("categoryName") String categoryName);
 
+    // @Insert("INSERT INTO learning_data (learning_data_name, learning_time, category_id, user_id, registered_month, created_at, updated_at) " +
+    //         "VALUES (#{learningDataName}, #{learningTime}, #{categoryId}, #{userId}, CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
+    // @Options(useGeneratedKeys = true, keyProperty = "id")
+    // void insertLearningData(LearningData learningData);
+
     @Insert("INSERT INTO learning_data (learning_data_name, learning_time, category_id, user_id, registered_month, created_at, updated_at) " +
-            "VALUES (#{learningDataName}, #{learningTime}, #{categoryId}, #{userId}, CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
-    @Options(useGeneratedKeys = true, keyProperty = "id")
-    void insertLearningData(LearningData learningData);
+        "VALUES (#{learningDataName}, #{learningTime}, #{categoryId}, #{userId}, #{registeredMonth}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)")
+@Options(useGeneratedKeys = true, keyProperty = "id")
+void insertLearningData(LearningData learningData);
 
     @Select("SELECT id, learning_data_name, learning_time, category_id, user_id, registered_month, created_at, updated_at " +
             "FROM learning_data WHERE user_id = #{userId} ORDER BY created_at DESC")

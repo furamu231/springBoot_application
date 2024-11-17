@@ -1,7 +1,7 @@
 package com.spring.springbootapplication.entity;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class LearningData {
 
@@ -10,7 +10,7 @@ public class LearningData {
     private Integer learningTime;
     private Integer categoryId;
     private Integer userId;
-    private Date registeredMonth;
+    private LocalDate registeredMonth; // 修正: LocalDate 型に変更
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private Timestamp deletedAt;
@@ -55,11 +55,11 @@ public class LearningData {
         this.userId = userId;
     }
 
-    public Date getRegisteredMonth() {
+    public LocalDate getRegisteredMonth() {
         return registeredMonth;
     }
 
-    public void setRegisteredMonth(Date registeredMonth) {
+    public void setRegisteredMonth(LocalDate registeredMonth) {
         this.registeredMonth = registeredMonth;
     }
 
