@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     // モーダルの閉じるボタンのクリックイベント
     $("#closeModalButton").on("click", function () {
-        $("#successModal").hide(); // モーダルを非表示にする
-        location.reload(); // ページをリロードして変更を反映
+        $("#successModal").hide(); 
+        location.reload(); 
     });
 });
