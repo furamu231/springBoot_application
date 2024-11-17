@@ -169,19 +169,26 @@ public class UserController {
 
         // 個人開発15までにwarning解消すること
 
-        switch (category) {
-            case "Backend":
-            japaneseCategory = "バックエンド";
-                break;
-            case "Frontend":
-            japaneseCategory = "フロントエンド";
-                break;
-            case "Infra":
-                japaneseCategory = "インフラ";
-                break;
-            default:
-                return "error/404";
-        }
+        // switch (category) {
+        //     case "Backend":
+        //     japaneseCategory = "バックエンド";
+        //         break;
+        //     case "Frontend":
+        //     japaneseCategory = "フロントエンド";
+        //         break;
+        //     case "Infra":
+        //         japaneseCategory = "インフラ";
+        //         break;
+        //     default:
+        //         return "error/404";
+        // }
+
+        japaneseCategory = switch (category) {
+            case "Backend" -> "バックエンド";
+            case "Frontend" -> "フロントエンド";
+            case "Infra" -> "インフラ";
+            default -> throw new IllegalArgumentException("無効なカテゴリ: " + category);
+        };
 
         model.addAttribute("category", japaneseCategory);
         model.addAttribute("id", id);
