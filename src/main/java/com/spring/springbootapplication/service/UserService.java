@@ -62,3 +62,5 @@ public class UserService implements UserDetailsService {
             .build();
     }
 }
+
+// DB側でメールアドレスが一意制約か確認する
