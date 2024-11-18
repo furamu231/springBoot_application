@@ -80,3 +80,5 @@ int checkDuplicateLearningDataName(@Param("userId") Integer userId, @Param("lear
     """)
     List<Map<String, Object>> findTotalLearningTime(@Param("userId") Integer userId);
 }
+
+//
