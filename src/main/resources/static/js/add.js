@@ -175,7 +175,7 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify(formData),
             success: function (response) {
-                const message = `${categoryName} の ${learningDataName} を ${learningTime} 分で追加しました！`;
+                const message = `${categoryName} に ${learningDataName} を ${learningTime} 分で追加しました！`;
                 $("#modalMessage").text(message);
                 $("#successModal").show();
             },
