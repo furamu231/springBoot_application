@@ -1,0 +1,49 @@
+<!-- fragments.html -->
+<div th:fragment="skillSection(categoryName, skills)">
+    <div class="sub-container">
+        <div class="inner-container">
+            <div class="header-container">
+                <div class="left-box">
+                    <div class="category-container">
+                        <span class="category-text" th:text="${categoryName}"></span>
+                    </div>
+                </div>
+                <a class="add-skill-button right-button"
+                   th:attr="data-category=${categoryName}, data-id=${user.id}"
+                   href="#">項目を追加する</a>
+            </div>
+            <div class="content-container">
+                <div class="top-box">
+                    <div class="top-box-item">項目名</div>
+                    <div class="top-box-item">学習時間</div>
+                </div>
+                <div class="scroll-wrapper">
+                    <div th:each="skill : ${skills}" class="middle-box">
+                        <div class="middle-box-item" th:text="${skill.learningDataName}"></div>
+                        <div class="middle-box-item">
+                            <div class="dropdown-wrapper">
+                                <select class="time-dropdown">
+                                    <option th:each="i : ${#numbers.sequence(1, 6666)}"
+                                            th:value="${i}"
+                                            th:text="${i}"
+                                            th:selected="${i} == ${skill.learningTime}">
+                                    </option>
+                                </select>
+                                <div class="dropdown-arrow">
+                                    <div class="arrow-up"></div>
+                                    <div class="arrow-down"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="middle-box-item">
+                            <button class="save-button" th:attr="data-id=${skill.id}">学習時間を保存する</button>
+                        </div>
+                        <div class="middle-box-item">
+                            <button class="delete-button" th:attr="data-id=${skill.id}">削除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
