@@ -183,10 +183,16 @@ public class UserController {
         //         return "error/404";
         // }
 
+        // japaneseCategory = switch (category) {
+        //     case "Backend" -> "バックエンド";
+        //     case "Frontend" -> "フロントエンド";
+        //     case "Infra" -> "インフラ";
+        //     default -> throw new IllegalArgumentException("無効なカテゴリ: " + category);
+        // };
         japaneseCategory = switch (category) {
-            case "Backend" -> "バックエンド";
-            case "Frontend" -> "フロントエンド";
-            case "Infra" -> "インフラ";
+            case "バックエンド" -> "Backend";
+            case "フロントエンド" -> "Frontend";
+            case "インフラ" -> "Infra";
             default -> throw new IllegalArgumentException("無効なカテゴリ: " + category);
         };
 
