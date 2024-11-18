@@ -1,5 +1,6 @@
 package com.spring.springbootapplication.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -51,9 +52,11 @@ public interface LearningMapper {
     LearningDataResponse findLatestLearningDataWithCategory();
 
     
-    @Select("SELECT COUNT(*) FROM learning_data WHERE user_id = #{userId} AND learning_data_name = #{learningDataName}")
-    int checkDuplicateLearningDataName(@Param("userId") Integer userId, @Param("learningDataName") String learningDataName);
+    // @Select("SELECT COUNT(*) FROM learning_data WHERE user_id = #{userId} AND learning_data_name = #{learningDataName}")
+    // int checkDuplicateLearningDataName(@Param("userId") Integer userId, @Param("learningDataName") String learningDataName);
 
+    @Select("SELECT COUNT(*) FROM learning_data WHERE user_id = #{userId} AND learning_data_name = #{learningDataName} AND registered_month = #{registeredMonth}")
+int checkDuplicateLearningDataName(@Param("userId") Integer userId, @Param("learningDataName") String learningDataName, @Param("registeredMonth") LocalDate registeredMonth);
     @Update("UPDATE learning_data SET learning_time = #{learningTime}, updated_at = CURRENT_TIMESTAMP WHERE id = #{id}")
     void updateLearningTime(@Param("id") Integer id, @Param("learningTime") Integer learningTime);
 

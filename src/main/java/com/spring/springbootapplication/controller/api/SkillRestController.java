@@ -1,5 +1,8 @@
 package com.spring.springbootapplication.controller.api;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -43,44 +46,91 @@ public class SkillRestController {
         return ResponseEntity.ok(response);
     }
 
+    // @PostMapping("/add")
+    // public ResponseEntity<?> addSkill(@RequestBody LearningDataDTO dto) {
+    //     try {
+
+    //         // カテゴリ英語で取れてくるから忘れないで
+    //         // カテゴリIDのバリデーション
+
+    //         if (dto.getCategoryId() == null || dto.getCategoryId() < 1 || dto.getCategoryId() > 3) {
+    //             return ResponseEntity.badRequest().body("無効なカテゴリIDです。");
+    //         }
+
+    //         if (dto.getUserId() == null) {
+    //             return ResponseEntity.badRequest().body("ユーザーIDが設定されていません。");
+    //         }
+
+    //         boolean isDuplicate = learningService.isLearningDataNameDuplicated(dto.getUserId(), dto.getLearningDataName());
+    //         if (isDuplicate) {
+    //             String errorMessage = String.format("「%s」は既に登録されています。", dto.getLearningDataName());
+    //             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
+    //         }
+
+    //         // データを保存
+    //         learningService.saveLearningData(dto);
+
+    //         return ResponseEntity.ok("スキルが正常に追加されました。");
+
+    //     } catch (DataIntegrityViolationException e) {
+    //         // データベースの一意制約違反の場合
+    //         // 発生しないはずだけど
+    //         String errorMessage = String.format("「%s」は既に登録済。", dto.getLearningDataName());
+    //         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
+
+    //     } catch (Exception e) {
+    //         // その他の例外
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("登録処理中にエラーが発生しました。");
+    //     }
+    // }
+
     @PostMapping("/add")
-    public ResponseEntity<?> addSkill(@RequestBody LearningDataDTO dto) {
-        try {
-
-            // カテゴリ英語で取れてくるから忘れないで
-            // カテゴリIDのバリデーション
-
-            if (dto.getCategoryId() == null || dto.getCategoryId() < 1 || dto.getCategoryId() > 3) {
-                return ResponseEntity.badRequest().body("無効なカテゴリIDです。");
-            }
-
-            if (dto.getUserId() == null) {
-                return ResponseEntity.badRequest().body("ユーザーIDが設定されていません。");
-            }
-
-            boolean isDuplicate = learningService.isLearningDataNameDuplicated(dto.getUserId(), dto.getLearningDataName());
-            if (isDuplicate) {
-                String errorMessage = String.format("「%s」は既に登録されています。", dto.getLearningDataName());
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
-            }
-
-            // データを保存
-            learningService.saveLearningData(dto);
-
-            return ResponseEntity.ok("スキルが正常に追加されました。");
-
-        } catch (DataIntegrityViolationException e) {
-            // データベースの一意制約違反の場合
-            // 発生しないはずだけど
-            String errorMessage = String.format("「%s」は既に登録済。", dto.getLearningDataName());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
-
-        } catch (Exception e) {
-            // その他の例外
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("登録処理中にエラーが発生しました。");
+public ResponseEntity<?> addSkill(@RequestBody LearningDataDTO dto) {
+    try {
+        if (dto.getCategoryId() == null || dto.getCategoryId() < 1 || dto.getCategoryId() > 3) {
+            return ResponseEntity.badRequest().body("無効なカテゴリIDです。");
         }
-    }
 
+        if (dto.getUserId() == null) {
+            return ResponseEntity.badRequest().body("ユーザーIDが設定されていません。");
+        }
+
+        // `registeredMonth` を `String` から `LocalDate` に変換
+        LocalDate registeredMonth;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            registeredMonth = LocalDate.parse(dto.getRegisteredMonth(), formatter);
+        } catch (DateTimeParseException e) {
+            return ResponseEntity.badRequest().body("登録月の形式が無効です。");
+        }
+
+        // 重複チェックに `registeredMonth` を追加
+        boolean isDuplicate = learningService.isLearningDataNameDuplicated(
+            dto.getUserId(), 
+            dto.getLearningDataName(), 
+            registeredMonth
+        );
+
+        if (isDuplicate) {
+            String errorMessage = String.format("「%s」は既に登録されています。", dto.getLearningDataName());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
+        }
+
+        // DTO からエンティティへの変換時に `registeredMonth` を設定
+        dto.setRegisteredMonth(registeredMonth.toString());
+
+        // データを保存
+        learningService.saveLearningData(dto);
+        return ResponseEntity.ok("スキルが正常に追加されました。");
+
+    } catch (DataIntegrityViolationException e) {
+        String errorMessage = String.format("「%s」は既に登録済。", dto.getLearningDataName());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
+
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("登録処理中にエラーが発生しました。");
+    }
+}
     @PutMapping("/update")
     public ResponseEntity<?> updateLearningTime(@RequestBody LearningDataDTO dto) {
         // デバック用ね

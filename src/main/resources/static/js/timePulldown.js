@@ -1,4 +1,3 @@
-// 学習時間のプルダウンメニューを生成する関数
 function createDropdown() {
     const wrapper = document.createElement("div");
     wrapper.className = "dropdown-wrapper";
