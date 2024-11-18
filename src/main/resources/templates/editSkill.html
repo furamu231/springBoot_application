@@ -53,7 +53,7 @@
                                    
                                     <div class="dropdown-wrapper">
                                         <select class="time-dropdown">
-                                            <option th:each="i : ${#numbers.sequence(1, 99)}"
+                                            <option th:each="i : ${#numbers.sequence(1, 9999)}"
                                                     th:value="${i}"
                                                     th:text="${i}"
                                                     th:selected="${i} == ${skill.learningTime}">
@@ -98,7 +98,7 @@
                                 <div class="middle-box-item">
                                     <div class="dropdown-wrapper">
                                         <select class="time-dropdown">
-                                            <option th:each="i : ${#numbers.sequence(1, 99)}"
+                                            <option th:each="i : ${#numbers.sequence(1, 9999)}"
                                                     th:value="${i}"
                                                     th:text="${i}"
                                                     th:selected="${i} == ${skill.learningTime}">
@@ -143,7 +143,7 @@
                                 <div class="middle-box-item">
                                     <div class="dropdown-wrapper">
                                         <select class="time-dropdown">
-                                            <option th:each="i : ${#numbers.sequence(1, 99)}"
+                                            <option th:each="i : ${#numbers.sequence(1, 9999)}"
                                                     th:value="${i}"
                                                     th:text="${i}"
                                                     th:selected="${i} == ${skill.learningTime}">
