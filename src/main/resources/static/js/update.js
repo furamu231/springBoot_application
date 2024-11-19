@@ -82,7 +82,7 @@ $(document).ready(function () {
                 learningTime: parseInt(newLearningTime, 10)
             }),
             success: function () {
-                const message = `${learningDataName}の学習時間を${newLearningTime}分に更新しました！`;
+                const message = `${learningDataName}の学習時間を保存しました！`;
                 $("#modalMessage").text(message);
                 $("#successModal").show();
             },
