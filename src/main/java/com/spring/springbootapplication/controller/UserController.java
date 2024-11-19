@@ -124,14 +124,6 @@ public class UserController {
         }
     }
 
-
-
-
-
-
-
-    // ここから検索ソート(ユーザーコントローラから分割予定)
-
     @GetMapping("/editSkill/{id}")
     public String showEditSkillForm(@PathVariable Integer id,
                                     @RequestParam(required = false) String month,
