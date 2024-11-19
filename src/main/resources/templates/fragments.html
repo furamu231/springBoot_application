@@ -21,14 +21,25 @@
                     <div th:each="skill : ${skills}" class="middle-box">
                         <div class="middle-box-item" th:text="${skill.learningDataName}"></div>
                         <div class="middle-box-item">
-                            <div class="dropdown-wrapper" th:attr="data-selected=${skill.learningTime}">
-                                <!-- JavaScript によって動的に生成されるため、空の select 要素のみ用意 -->
-                                <select class="time-dropdown"></select>
+
+                            <!-- <div class="dropdown-wrapper" th:attr="data-selected=${skill.learningTime}">
+                            
+                                <div class="time-dropdown" th:text="${skill.learningTime}"></div>
                                 <div class="dropdown-arrow">
-                                    <div class="arrow-up"></div>
-                                    <div class="arrow-down"></div>
+                                    <div class="arrow-up" data-action="increment"></div>
+                                    <div class="arrow-down" data-action="decrement"></div>
+                                </div>
+                            </div> -->
+
+                            <div class="dropdown-wrapper" th:attr="data-selected=${skill.learningTime}">
+                                <input type="text" class="time-dropdown" th:value="${skill.learningTime}" />
+                                <div class="dropdown-arrow">
+                                    <div class="arrow-up" data-action="increment"></div>
+                                    <div class="arrow-down" data-action="decrement"></div>
                                 </div>
                             </div>
+
+                          
                         </div>
                         <div class="middle-box-item">
                             <button class="save-button" th:attr="data-id=${skill.id}">学習時間を保存する</button>
