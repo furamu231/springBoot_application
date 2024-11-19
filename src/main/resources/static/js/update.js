@@ -1,14 +1,22 @@
 // $(document).ready(function () {
+   
+//     function showError(message) {
+//         const $errorMessageContainer = $("#errorMessageContainer");
+//         $errorMessageContainer.text(message).css("visibility", "visible");
+//     }
+
 //     // 「学習時間を保存する」ボタンのクリックイベント
 //     $(".save-button").on("click", function () {
 //         const learningDataId = $(this).data("id");
-//         const newLearningTime = $(this).closest(".middle-box-item").prev().find(".time-dropdown").val();
+//         const newLearningTime = $(this).closest(".middle-box-item").prev().find(".time-dropdown").text().trim();
+//         const learningDataName = $(this).closest(".middle-box").find(".middle-box-item").first().text().trim();
 
 //         console.log("learningDataId:", learningDataId);
 //         console.log("newLearningTime:", newLearningTime);
+//         console.log("learningDataName:", learningDataName);
 
 //         // バリデーションチェック
-//         if (!newLearningTime || isNaN(newLearningTime) || Number(newLearningTime) < 1) {
+//         if (!newLearningTime || isNaN(newLearningTime) || parseInt(newLearningTime, 10) < 1) {
 //             showError("学習時間は1以上の数字で選択してください。");
 //             return;
 //         }
@@ -20,10 +28,10 @@
 //             contentType: "application/json",
 //             data: JSON.stringify({
 //                 id: learningDataId,
-//                 learningTime: Number(newLearningTime)
+//                 learningTime: parseInt(newLearningTime, 10)
 //             }),
 //             success: function () {
-//                 const message = `学習時間が${newLearningTime}分に更新されました！`;
+//                 const message = `${learningDataName}の学習時間を${newLearningTime}分に更新しました！`;
 //                 $("#modalMessage").text(message);
 //                 $("#successModal").show();
 //             },
@@ -36,15 +44,12 @@
 
 //     // モーダルの閉じるボタンのクリックイベント
 //     $("#closeModalButton").on("click", function () {
-//         $("#successModal").hide(); 
-//         location.reload(); 
+//         $("#successModal").hide();
+//         location.reload(); // 必要に応じてコメントアウト
 //     });
 // });
 
 $(document).ready(function () {
-    /**
-     * エラーメッセージ表示関数
-     */
     function showError(message) {
         const $errorMessageContainer = $("#errorMessageContainer");
         $errorMessageContainer.text(message).css("visibility", "visible");
@@ -53,7 +58,8 @@ $(document).ready(function () {
     // 「学習時間を保存する」ボタンのクリックイベント
     $(".save-button").on("click", function () {
         const learningDataId = $(this).data("id");
-        const newLearningTime = $(this).closest(".middle-box-item").prev().find(".time-dropdown").val();
+        // 修正箇所: text() -> val()
+        const newLearningTime = $(this).closest(".middle-box-item").prev().find(".time-dropdown").val().trim();
         const learningDataName = $(this).closest(".middle-box").find(".middle-box-item").first().text().trim();
 
         console.log("learningDataId:", learningDataId);
@@ -61,7 +67,7 @@ $(document).ready(function () {
         console.log("learningDataName:", learningDataName);
 
         // バリデーションチェック
-        if (!newLearningTime || isNaN(newLearningTime) || Number(newLearningTime) < 1) {
+        if (!newLearningTime || isNaN(newLearningTime) || parseInt(newLearningTime, 10) < 1) {
             showError("学習時間は1以上の数字で選択してください。");
             return;
         }
@@ -73,7 +79,7 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify({
                 id: learningDataId,
-                learningTime: Number(newLearningTime)
+                learningTime: parseInt(newLearningTime, 10)
             }),
             success: function () {
                 const message = `${learningDataName}の学習時間を${newLearningTime}分に更新しました！`;
@@ -90,6 +96,6 @@ $(document).ready(function () {
     // モーダルの閉じるボタンのクリックイベント
     $("#closeModalButton").on("click", function () {
         $("#successModal").hide();
-        location.reload();
+        location.reload(); // 必要に応じてコメントアウト
     });
 });
