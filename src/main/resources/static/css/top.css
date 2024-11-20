@@ -32,6 +32,12 @@ body {
     text-align: center;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
 .login-btn {
     background-color: white;
     color: #2c5670;
@@ -83,21 +89,9 @@ body {
     border: none; 
 }
 
-/* .icon-container {
-    width: 360px;
-    height: 360px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; 
-} */
-
 .icon-container {
     width: 360px;
-    height: 420px; /* 高さを調整（360px + 57px + 10px） */
+    height: 420px; 
     position: absolute;
     top: 0;
     left: 0;
@@ -285,9 +279,6 @@ body {
 .chart-container {
     width: 1081px;
     height: 532.5px;
-    /* background-color: #f9f9f9; */
-    /* border-radius: 10px; */
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
     position: absolute;
     top: calc(520px + 151px + 60px); 
     left: 50%;

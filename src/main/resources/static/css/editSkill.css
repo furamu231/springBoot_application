@@ -27,9 +27,15 @@ body {
     position: relative;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .header-title.center-title {
     margin: 0 auto;
     text-align: center;
+    text-align: center; 
 }
 
 .login-btn {

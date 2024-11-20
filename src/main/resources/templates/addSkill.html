@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="/css/modal.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/add.js" defer></script>
+    <script src="/js/getUserId.js"></script>
+    
 </head>
 <body>
     <div class="header">
-        <div class="header-title">My Portfolio</div>
+        <!-- <div class="header-title">My Portfolio</div> -->
+        <a id="userPortfolioLink" href="#" class="header-title">My Portfolio</a>
         <a href="/logout" class="login-btn">ログアウト</a>
     </div>
+    <input type="hidden" id="userId" name="userId" th:value="${id}">
 
     <div class="center-container" th:text="${categoryJapanese} + 'に項目を追加'"></div>
     <div id="errorMessageContainer" class="error-message-container"></div>
@@ -49,5 +53,6 @@
     <div class="footer">
         portfolio site
     </div>
+    
 </body>
 </html>
