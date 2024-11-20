@@ -50,14 +50,6 @@ public class LearningService {
         return learningMapper.findLatestLearningDataWithCategory();
     }
 
-    // 重複チェック(デバック)
-
-    // public boolean isLearningDataNameDuplicated(Integer userId, String learningDataName) {
-    //     int count = learningMapper.checkDuplicateLearningDataName(userId, learningDataName);
-    //     // System.out.println("重複チェック結果: " + count);
-    //     return count > 0;
-    // }
-
     public boolean isLearningDataNameDuplicated(Integer userId, String learningDataName, LocalDate registeredMonth) {
         int count = learningMapper.checkDuplicateLearningDataName(userId, learningDataName, registeredMonth);
         return count > 0;

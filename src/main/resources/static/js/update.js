@@ -4,10 +4,8 @@ $(document).ready(function () {
         $errorMessageContainer.text(message).css("visibility", "visible");
     }
 
-    // 「学習時間を保存する」ボタンのクリックイベント
     $(".save-button").on("click", function () {
         const learningDataId = $(this).data("id");
-        // 修正箇所: text() -> val()
         const newLearningTime = $(this).closest(".middle-box-item").prev().find(".time-dropdown").val().trim();
         const learningDataName = $(this).closest(".middle-box").find(".middle-box-item").first().text().trim();
 

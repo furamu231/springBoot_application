@@ -147,33 +147,8 @@ public class UserController {
         return "editSkill";
     }
 
-    // ここまで
-    
-    // @GetMapping("/addSkill/{category}/{id}")
-    //     public String showAddSkillForm(@PathVariable String category,
-    //                                    @PathVariable Integer id,
-    //                                    Model model) {
-
-    //     String japaneseCategory;
-
-    //     japaneseCategory = switch (category) {
-    //         case "バックエンド" -> "Backend";
-    //         case "フロントエンド" -> "Frontend";
-    //         case "インフラ" -> "Infra";
-    //         default -> throw new IllegalArgumentException("無効なカテゴリ: " + category);
-    //     };
-
-    //     model.addAttribute("category", japaneseCategory);
-    //     model.addAttribute("id", id);
-
-    //     LearningDataDTO dto = new LearningDataDTO();
-    //     model.addAttribute("dto", dto);
-
-    //     return "addSkill";
-    // }
-
     @GetMapping("/addSkill/{category}/{id}")
-public String showAddSkillForm(@PathVariable String category,
+    public String showAddSkillForm(@PathVariable String category,
                                @PathVariable Integer id,
                                Model model) {
 
