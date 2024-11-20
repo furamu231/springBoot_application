@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="header-title">My Portfolio</div>
+        <a th:href="'/users/success/' + ${user.id}" class="header-title">My Portfolio</a>
         <a href="/logout" class="login-btn">ログアウト</a>
     </div>
 
@@ -49,5 +49,64 @@
     <div class="footer">
         portfolio site
     </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スキル登録</title>
+    <link rel="stylesheet" href="/css/addSkill.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/add.js" defer></script>
+    <script src="/js/getUserId.js"></script>
+    
+</head>
+<body>
+    <div class="header">
+        <!-- <div class="header-title">My Portfolio</div> -->
+        <a id="userPortfolioLink" href="#" class="header-title">My Portfolio</a>
+        <a href="/logout" class="login-btn">ログアウト</a>
+    </div>
+    <input type="hidden" id="userId" name="userId" th:value="${id}">
+
+    <div class="center-container" th:text="${categoryJapanese} + 'に項目を追加'"></div>
+    <div id="errorMessageContainer" class="error-message-container"></div>
+
+    <form id="skillForm" method="post">
+        <input type="hidden" id="userId" name="userId" th:value="${id}">
+        <input type="hidden" id="categoryName" name="categoryName" th:value="${category}">
+    
+        <div class="form-container">
+            <div class="child-container">
+                <div class="top-left-container">項目名</div>
+                <input type="text" id="learningDataName" name="learningDataName" class="learning-data-input" required>
+            </div>
+
+            <div class="child-container-bottom">
+                <div class="inner-top-container">
+                    <div class="top-left-learning-time">学習時間</div>
+                    <input type="number" id="learningTime" name="learningTime" class="learning-time-input" required min="1">
+                </div>
+            </div>
+
+            <div class="button-container" id="registerButton">追加する</div>
+        </div>
+    </form>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div id="modalMessage" class="message-container"></div>
+            <button id="closeModal" class="modal-button">編集ページに戻る</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        portfolio site
+    </div>
+    
 </body>
 </html>

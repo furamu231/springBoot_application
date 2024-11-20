@@ -11,7 +11,8 @@
 </head>
 <body>
     <div class="header">
-        <div class="header-title">My Portfolio</div>
+        <!-- <div class="header-title">My Portfolio</div> -->
+        <a th:href="'/users/success/' + ${user.id}" class="header-title">My Portfolio</a>
         <button class="login-btn" onclick="window.location.href='/logout'">ログアウト</button>
     </div>
 
