@@ -322,6 +322,7 @@ a {
     padding-left: 16px;
     background-color: transparent;
     box-sizing: border-box;
+    overflow: hidden;  
 }
 
 /* .time-dropdown {
@@ -412,6 +413,13 @@ a {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+}
+
+.save-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
 }
 
 .save-button:hover {
