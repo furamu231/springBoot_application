@@ -94,6 +94,17 @@ a {
     z-index: 100; 
 }
 
+ul {
+    list-style: none; /* ドットを非表示にする */
+    margin: 0;        /* デフォルトの余白を削除 */
+    padding: 0;       /* デフォルトのパディングを削除 */
+}
+
+li {
+    margin: 0; /* liの余白を削除 */
+    padding: 0; /* liのパディングを削除 */
+}
+
 .form-container {
     top: 328px;
     left: 50%;

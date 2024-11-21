@@ -1,8 +1,33 @@
 $(document).ready(function () {
-    function showError(message) {
-        const $errorMessageContainer = $("#errorMessageContainer");
-        $errorMessageContainer.text(message).css("visibility", "visible");
+    function validateInput($input) {
+        const value = $input.val().trim();
+        const isValid = value && !isNaN(value) && parseInt(value, 10) >= 1;
+        const $button = $input.closest(".middle-box").find(".save-button");
+
+        if (isValid) {
+            $button.prop("disabled", false).css({
+                "background-color": "#fff",
+                "color": "#1B5678",
+                "border": "1px solid #1B5678",
+                "cursor": "pointer"
+            });
+        } else {
+            $button.prop("disabled", true).css({
+                "background-color": "#ccc",
+                "color": "#666",
+                "border": "1px solid #ccc",
+                "cursor": "not-allowed"
+            });
+        }
     }
+
+    $(".time-dropdown").on("input", function () {
+        validateInput($(this));
+    });
+
+    $(".time-dropdown").each(function () {
+        validateInput($(this));
+    });
 
     $(".save-button").on("click", function () {
         const learningDataId = $(this).data("id");
