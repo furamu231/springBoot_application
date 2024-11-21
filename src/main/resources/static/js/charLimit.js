@@ -10,3 +10,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// 文字数カウント
+
