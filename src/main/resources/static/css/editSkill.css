@@ -27,9 +27,15 @@ body {
     position: relative;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .header-title.center-title {
     margin: 0 auto;
     text-align: center;
+    text-align: center; 
 }
 
 .login-btn {
@@ -318,6 +324,23 @@ body {
     box-sizing: border-box;
 }
 
+/* .time-dropdown {
+    width: 160px;
+    height: 40px;
+    padding-left: 12px;
+    padding-right: 36px; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: transparent;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none;
+} */
+
 .time-dropdown {
     width: 160px;
     height: 40px;
@@ -330,6 +353,11 @@ body {
     background-color: transparent;
     box-sizing: border-box;
     appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none;
+    line-height: 40px; /* 高さと同じ値に設定 */
+    text-align: left; /* 必要なら左揃え */
 }
 
 .dropdown-wrapper {
@@ -349,7 +377,7 @@ body {
     right: 2px;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none; 
+    pointer-events: auto; 
 }
 
 .arrow-up {
@@ -369,6 +397,7 @@ body {
     border-top: 5px solid #333;
     margin-top: 2px;
 }
+
 
 .save-button {
     width: 158px;

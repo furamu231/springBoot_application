@@ -124,14 +124,6 @@ public class UserController {
         }
     }
 
-
-
-
-
-
-
-    // ここから検索ソート(ユーザーコントローラから分割予定)
-
     @GetMapping("/editSkill/{id}")
     public String showEditSkillForm(@PathVariable Integer id,
                                     @RequestParam(required = false) String month,
@@ -155,47 +147,27 @@ public class UserController {
         return "editSkill";
     }
 
-    // ここまで
-    
     @GetMapping("/addSkill/{category}/{id}")
-        public String showAddSkillForm(@PathVariable String category,
-                                       @PathVariable Integer id,
-                                       Model model) {
+    public String showAddSkillForm(@PathVariable String category,
+                               @PathVariable Integer id,
+                               Model model) {
 
-        // カテゴリ名の逆変換処理 (日本語から英語)
-        // テーブル名変更する or utilとして変換クラスを別で定義したほうがいいかな...
+    String japaneseCategory;
 
-        String japaneseCategory;
+    japaneseCategory = switch (category) {
+        case "バックエンド" -> "Backend";
+        case "フロントエンド" -> "Frontend";
+        case "インフラ" -> "Infra";
+        default -> throw new IllegalArgumentException("無効なカテゴリ: " + category);
+    };
 
-        // 個人開発15までにwarning解消すること
+    model.addAttribute("categoryEnglish", japaneseCategory);
+    model.addAttribute("categoryJapanese", category); 
+    model.addAttribute("id", id);
 
-        // switch (category) {
-        //     case "Backend":
-        //     japaneseCategory = "バックエンド";
-        //         break;
-        //     case "Frontend":
-        //     japaneseCategory = "フロントエンド";
-        //         break;
-        //     case "Infra":
-        //         japaneseCategory = "インフラ";
-        //         break;
-        //     default:
-        //         return "error/404";
-        // }
+    LearningDataDTO dto = new LearningDataDTO();
+    model.addAttribute("dto", dto);
 
-        japaneseCategory = switch (category) {
-            case "Backend" -> "バックエンド";
-            case "Frontend" -> "フロントエンド";
-            case "Infra" -> "インフラ";
-            default -> throw new IllegalArgumentException("無効なカテゴリ: " + category);
-        };
-
-        model.addAttribute("category", japaneseCategory);
-        model.addAttribute("id", id);
-
-        LearningDataDTO dto = new LearningDataDTO();
-        model.addAttribute("dto", dto);
-
-        return "addSkill";
-    }
+    return "addSkill";
+}
 }

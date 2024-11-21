@@ -6,38 +6,48 @@
     <title>トップページ</title>
     <link rel="stylesheet" href="/css/top.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/chart.js" defer></script>
 </head>
 <body>
     <div class="header">
-        <div class="header-title">My Portfolio</div>
+        <!-- <div class="header-title">My Portfolio</div> -->
+        <a th:href="'/users/success/' + ${user.id}" class="header-title">My Portfolio</a>
         <button class="login-btn" onclick="window.location.href='/logout'">ログアウト</button>
     </div>
+
     <div class="content">
         <div class="main-container">
             <div class="icon-container">
                 <div class="circle-icon">
                     <img th:src="@{/api/images/{id}(id=${user.id})}"
-                    th:alt="${user.profileImage != null && user.profileImage.length > 0 ? 'プロフィール画像' : 'デフォルト画像'}" />
+                         th:alt="${user.profileImage != null ? 'プロフィール画像' : 'デフォルト画像'}" />
                 </div>
-            </div> 
+                <div class="user-name-container" th:text="${user.userName}"></div>
+            </div>
             <div class="intro-container">
                 <div class="intro-sub-container">
-                    <div class="intro-sub-child-container">
-                        自己紹介
-                    </div>
+                    <div class="intro-sub-child-container">自己紹介</div>
                 </div>
-                <div class="intro-secondary-container" th:text="${user.profile != null} ? ${user.profile} : '自己紹介がまだ登録されていません。'">
-                </div>
+                <div class="intro-secondary-container" th:text="${user.profile != null ? user.profile : '自己紹介がまだ登録されていません。'}"></div>
                 <a class="intro-button" th:href="@{/users/edit/{id}(id=${user.id})}">自己紹介を編集する</a>
             </div>
         </div>
+
         <div class="sub-box">
             <div class="inner-box">
                 <div class="title-box">学習チャート</div>
             </div>
             <a class="action-button" th:href="@{/users/editSkill/{id}(id=${user.id})}">編集する</a>
         </div>
+
+        <div id="chart-container" class="chart-container">
+            <canvas id="myChart" width="1081" height="532"></canvas>
+        </div>
+
+        <input type="hidden" id="user-id" th:value="${user.id}">
     </div>
+
     <div class="footer">
         portfolio site
     </div>

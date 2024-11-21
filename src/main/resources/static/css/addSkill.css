@@ -29,6 +29,11 @@ body {
     color: white;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .login-btn {
     background-color: white;
     color: #2c5670;

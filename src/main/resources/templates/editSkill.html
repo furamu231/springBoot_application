@@ -12,7 +12,8 @@
 <body>
     <input type="hidden" id="user-id" th:value="${user.id}">
     <div class="header">
-        <div class="header-title">My Portfolio</div>
+        <!-- <div class="header-title">My Portfolio</div> -->
+        <a th:href="'/users/success/' + ${user.id}" class="header-title">My Portfolio</a>
         <button class="login-btn" onclick="window.location.href='/logout'">ログアウト</button>
     </div>
     <div class="content">
@@ -23,150 +24,11 @@
                     <div class="arrow-up"></div>
                     <div class="arrow-down"></div>
                 </div>
-                <div class="dropdown-arrow">
-                    <div class="arrow-up"></div>
-                    <div class="arrow-down"></div>
-                </div>
             </div>
-            <div class="sub-container">
-                <div class="inner-container">
-                    <div class="header-container">
-                        <div class="left-box">
-                            <div class="category-container">
-                                <span class="category-text">バックエンド</span>
-                            </div>
-                        </div>
-                        <!-- <a class="right-button" th:href="@{'/users/addSkill/Backend/' + ${id}}">項目を追加する</a> -->
-                        <a class="add-skill-button right-button" th:attr="data-category='Backend', data-id=${id}" href="#">項目を追加する</a>
-                    </div>
-                    <div class="content-container">
-                        <div class="top-box">
-                            <div class="top-box-item">項目名</div>
-                            <div class="top-box-item">学習時間</div>
-                        </div>
-                        <div class="scroll-wrapper">
-                        
-                            <div th:each="skill : ${backendSkills}" class="middle-box">
-                                <div class="middle-box-item" th:text="${skill.learningDataName}"></div>
-                            
-                                <div class="middle-box-item">
-                                   
-                                    <div class="dropdown-wrapper">
-                                        <select class="time-dropdown">
-                                            <option th:each="i : ${#numbers.sequence(1, 180)}"
-                                                    th:value="${i}"
-                                                    th:text="${i}"
-                                                    th:selected="${i} == ${skill.learningTime}">
-                                            </option>
-                                        </select>
-                                        <div class="dropdown-arrow">
-                                            <div class="arrow-up"></div>
-                                            <div class="arrow-down"></div>
-                                        </div>
-                                    </div>
-                                </div>                    
-                                <div class="middle-box-item">
-                                    <button class="save-button" th:attr="data-id=${skill.id}">学習時間を保存する</button>
-                                </div>            
-                                <div class="middle-box-item">
-                                    <button class="delete-button" th:attr="data-id=${skill.id}">削除</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sub-container">
-                <div class="inner-container">
-                    <div class="header-container">
-                        <div class="left-box">
-                            <div class="category-container">
-                                <span class="category-text">フロントエンド</span>
-                            </div>
-                        </div>
-                        <!-- <a class="right-button" th:href="@{'/users/addSkill/Frontend/' + ${id}}">項目を追加する</a> -->
-                        <a class="add-skill-button right-button" th:attr="data-category='Frontend', data-id=${id}" href="#">項目を追加する</a>
-                    </div>
-                    <div class="content-container">
-                        <div class="top-box">
-                            <div class="top-box-item">項目名</div>
-                            <div class="top-box-item">学習時間</div>
-                        </div>
-                        <div class="scroll-wrapper">
-                            <div th:each="skill : ${frontendSkills}" class="middle-box">
-                                <div class="middle-box-item" th:text="${skill.learningDataName}"></div>
-                                <div class="middle-box-item">
-                                    <div class="dropdown-wrapper">
-                                        <select class="time-dropdown">
-                                            <option th:each="i : ${#numbers.sequence(1, 180)}"
-                                                    th:value="${i}"
-                                                    th:text="${i}"
-                                                    th:selected="${i} == ${skill.learningTime}">
-                                            </option>
-                                        </select>
-                                        <div class="dropdown-arrow">
-                                            <div class="arrow-up"></div>
-                                            <div class="arrow-down"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="middle-box-item">
-                                    <button class="save-button" th:attr="data-id=${skill.id}">学習時間を保存する</button>
-                                </div>
-                                <div class="middle-box-item">
-                                    <button class="delete-button" th:attr="data-id=${skill.id}">削除</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sub-container">
-                <div class="inner-container">
-                    <div class="header-container">
-                        <div class="left-box">
-                            <div class="category-container">
-                                <span class="category-text">インフラ</span>
-                            </div>
-                        </div>
-                        <!-- <a class="right-button" th:href="@{'/users/addSkill/Infra/' + ${id}}">項目を追加する</a> -->
-                        <a class="add-skill-button right-button" th:attr="data-category='Infra', data-id=${id}" href="#">項目を追加する</a>
-                    </div>
-                    <div class="content-container">
-                        <div class="top-box">
-                            <div class="top-box-item">項目名</div>
-                            <div class="top-box-item">学習時間</div>
-                        </div>
-                        <div class="scroll-wrapper">
-                            <div th:each="skill : ${infraSkills}" class="middle-box">
-                                <div class="middle-box-item" th:text="${skill.learningDataName}"></div>
-                                <div class="middle-box-item">
-                                    <div class="dropdown-wrapper">
-                                        <select class="time-dropdown">
-                                            <option th:each="i : ${#numbers.sequence(1, 180)}"
-                                                    th:value="${i}"
-                                                    th:text="${i}"
-                                                    th:selected="${i} == ${skill.learningTime}">
-                                            </option>
-                                        </select>
-                                        <div class="dropdown-arrow">
-                                            <div class="arrow-up"></div>
-                                            <div class="arrow-down"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="middle-box-item">
-                                    <button class="save-button" th:attr="data-id=${skill.id}">学習時間を保存する</button>
-                                </div>
-                                <div class="middle-box-item">
-                                    <button class="delete-button" th:attr="data-id=${skill.id}">削除</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-        </div> 
+            <div th:replace="fragments :: skillSection('バックエンド', ${backendSkills})"></div>
+            <div th:replace="fragments :: skillSection('フロントエンド', ${frontendSkills})"></div>
+            <div th:replace="fragments :: skillSection('インフラ', ${infraSkills})"></div>
+        </div>
     </div>
 
     <div id="successModal" class="modal">
@@ -176,14 +38,11 @@
         </div>
     </div>
 
-   <!-- 削除確認モーダル -->
-</div>
-
-
     <div class="footer">
         portfolio site
     </div>
     <script src="/js/monthPulldown.js"></script>
+    <script src="/js/timePulldown.js"></script>
     <script src="/js/move.js"></script>
     <script src="/js/update.js"></script>
     <script src="/js/delete.js"></script>

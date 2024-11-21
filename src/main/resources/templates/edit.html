@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="header">
-        <div class="header-title">My Portfolio</div>
+        <!-- <div class="header-title">My Portfolio</div> -->
+        <a class="header-title" th:href="@{/users/success/{id}(id=${user.id})}">My Portfolio</a>
         <button class="login-btn" onclick="window.location.href='/logout'">ログアウト</button>
     </div>
 

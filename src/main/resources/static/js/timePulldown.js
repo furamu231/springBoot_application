@@ -1,40 +1,31 @@
-// 学習時間のプルダウンメニューを生成する関数
-function createDropdown() {
-    const wrapper = document.createElement("div");
-    wrapper.className = "dropdown-wrapper";
-
-    const select = document.createElement("select");
-    select.className = "time-dropdown";
-
-    for (let i = 1; i <= 180; i++) {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = `${i}`;
-        select.appendChild(option);
-    }
-
-    const arrowContainer = document.createElement("div");
-    arrowContainer.className = "dropdown-arrow";
-
-    const arrowUp = document.createElement("div");
-    arrowUp.className = "arrow-up";
-
-    const arrowDown = document.createElement("div");
-    arrowDown.className = "arrow-down";
-
-    arrowContainer.appendChild(arrowUp);
-    arrowContainer.appendChild(arrowDown);
-
-    wrapper.appendChild(select);
-    wrapper.appendChild(arrowContainer);
-
-    return wrapper;
-}
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".middle-box").forEach(middleBox => {
-        const timeItem = middleBox.children[1];
-        timeItem.textContent = "";
-        timeItem.appendChild(createDropdown());
+    
+    document.querySelectorAll(".dropdown-wrapper").forEach(wrapper => {
+        const timeInput = wrapper.querySelector(".time-dropdown");
+
+       
+        let value = parseInt(timeInput.value, 10);
+
+        wrapper.addEventListener("click", (event) => {
+            const action = event.target.getAttribute("data-action");
+            if (action === "increment") {
+                value++;
+            } else if (action === "decrement") {
+                value = Math.max(0, value - 1); 
+            }
+
+            timeInput.value = value;
+        });
+
+        timeInput.addEventListener("change", () => {
+            const newValue = parseInt(timeInput.value, 10);
+
+            if (isNaN(newValue) || newValue < 0) {
+                timeInput.value = value;
+            } else {
+                value = newValue; 
+            }
+        });
     });
 });
